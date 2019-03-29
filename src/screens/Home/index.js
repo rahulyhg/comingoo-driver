@@ -1,10 +1,21 @@
 import React, { Component } from "react";
-import { Text, View, Image, ScrollView } from "react-native";
+import { Text, View, Image, ScrollView, TouchableOpacity } from "react-native";
 
 import { images } from "../../utils";
 import styles from "./styles";
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  navigate = route => {
+    const { navigation } = this.props;
+    navigation.navigate(route);
+  };
+
   render() {
     return (
       <ScrollView style={styles.container} contentContainerStyle={{ flex: 1 }}>
@@ -19,7 +30,9 @@ export default class Home extends Component {
           <View style={styles.middleInnerContainer}>
             <View style={styles.middleTextContainer}>
               <Text style={styles.smallTxt}>Vous n'avez pas de comple?</Text>
-              <Text style={styles.mediumTxt}>S'inscrire</Text>
+              <TouchableOpacity onPress={() => this.navigate("Signup")}>
+                <Text style={styles.mediumTxt}>S'inscrire</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -27,7 +40,9 @@ export default class Home extends Component {
           <View style={styles.bottomInnerContainer}>
             <View style={styles.bottomTextContainer}>
               <Text style={styles.smallTxt}>Vous avez deja un compte?</Text>
-              <Text style={styles.mediumTxt}>Se connecter</Text>
+              <TouchableOpacity onPress={() => this.navigate("Login")}>
+                <Text style={styles.mediumTxt}>Se connecter</Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.footerContainer}>
