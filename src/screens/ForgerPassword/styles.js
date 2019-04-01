@@ -6,8 +6,9 @@ const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: colors.bluePrimary
+    // flex: 1,
+    backgroundColor: colors.bluePrimary,
+    height: height * 0.9
   },
   headerStyle: {
     backgroundColor: colors.bluePrimary,
@@ -31,6 +32,7 @@ export default StyleSheet.create({
   headingTxt: {
     color: colors.light,
     fontSize: width * 0.1,
+    paddingHorizontal: width * 0.06,
     textAlign: "center"
   },
   fieldContainer: {
