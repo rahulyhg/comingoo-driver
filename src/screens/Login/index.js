@@ -35,11 +35,16 @@ class Login extends React.Component {
         numberError: !number,
         passwordError: !password
       });
-      return handlers.showToast("Please fill out all fields!", "danger");
+      return handlers.showToast("Veuillez remplir tous les champs!", "danger");
     }
 
     // const { onLogin } = this.props;
     // onLogin();
+  };
+
+  navigate = route => {
+    const { navigation } = this.props;
+    navigation.navigate(route);
   };
 
   render() {
@@ -89,7 +94,9 @@ class Login extends React.Component {
               </View>
               <View style={styles.forgetTxtContainer}>
                 <Text style={styles.smallTxt}>Mot de passe oublié ? </Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.navigate("ForgetPassword")}
+                >
                   <Text style={styles.mediumTxt}>Cliquez ici</Text>
                 </TouchableOpacity>
               </View>
