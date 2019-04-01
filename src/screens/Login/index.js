@@ -8,6 +8,7 @@ import { onLogin } from "../../store/auth/actions";
 import styles from "./styles";
 import { colors } from "../../constants";
 import { icons } from "../../utils";
+import { handlers } from "../../helpers";
 
 class Login extends React.Component {
   constructor(props) {
@@ -16,7 +17,9 @@ class Login extends React.Component {
     this.state = {
       showPassword: true,
       number: "",
-      password: ""
+      password: "",
+      passwordError: false,
+      numberError: false
     };
   }
 
@@ -26,12 +29,27 @@ class Login extends React.Component {
   });
 
   login = () => {
-    const { onLogin } = this.props;
-    onLogin();
+    const { number, password } = this.state;
+    if (!number || !password) {
+      this.setState({
+        numberError: !number,
+        passwordError: !password
+      });
+      return handlers.showToast("Please fill out all fields!", "danger");
+    }
+
+    // const { onLogin } = this.props;
+    // onLogin();
   };
 
   render() {
-    const { showPassword, number, password } = this.state;
+    const {
+      showPassword,
+      number,
+      password,
+      passwordError,
+      numberError
+    } = this.state;
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
@@ -40,18 +58,19 @@ class Login extends React.Component {
           </View>
           <View style={styles.middleContainer}>
             <View style={styles.fieldContainer}>
-              <Item stackedLabel style={styles.inputs}>
+              <Item stackedLabel style={styles.inputs} error={numberError}>
                 <Label style={styles.labelStyle}>Numéro de téléphone</Label>
                 <Input
                   style={styles.inputStyle}
                   keyboardType="phone-pad"
                   value={number}
                   onChangeText={number => this.setState({ number })}
+                  error
                 />
               </Item>
               <View stackedLabel style={styles.inputs}>
                 <Label style={styles.labelStyle}>Mot de passe</Label>
-                <Item>
+                <Item error={passwordError}>
                   <Input
                     style={styles.inputStyle}
                     onChangeText={password => this.setState({ password })}
@@ -76,7 +95,7 @@ class Login extends React.Component {
               </View>
             </View>
             <View style={styles.bottomContainer}>
-              <TouchableOpacity style={styles.nextBtn}>
+              <TouchableOpacity style={styles.nextBtn} onPress={this.login}>
                 <Image style={styles.btnImage} source={icons.right_arrow} />
               </TouchableOpacity>
             </View>
