@@ -37,7 +37,8 @@ export default StyleSheet.create({
     width: "80%"
   },
   labelStyle: {
-    color: colors.light
+    color: colors.light,
+    fontSize: width * 0.04
   },
   inputs: {
     marginTop: "10%"
