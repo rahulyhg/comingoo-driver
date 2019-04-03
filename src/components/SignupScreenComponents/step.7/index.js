@@ -38,7 +38,7 @@ export default class Step7 extends React.Component {
     }
     else {
       return Toast.show({
-        text: 'One of the field is missing',
+        text: 'You forgot to upload your Vehicle Registration Certificate image',
         type: "warning",
         duration: 3000,
         buttonText: 'Okay'

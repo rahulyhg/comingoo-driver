@@ -5,6 +5,7 @@ import { colors } from "../../../constants";
 export default StyleSheet.create({
  container: {
     flex: 1,
+    height : height,
     backgroundColor: colors.bluePrimary
   },
 
@@ -58,7 +59,8 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.06,
+    marginBottom: height * 0.25,
+    marginLeft : 5,
   },
 
   backBtn : {
@@ -68,7 +70,8 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.06,
+    marginBottom: height * 0.25,
+    marginRight : 5
   },
 
   bottomContainer: {

@@ -38,7 +38,7 @@ export default class Step6 extends React.Component {
     }
     else {
       return Toast.show({
-        text: 'One of the field is missing',
+        text: 'You forgot to upload ID card image',
         type: "warning",
         duration: 3000,
         buttonText: 'Okay'

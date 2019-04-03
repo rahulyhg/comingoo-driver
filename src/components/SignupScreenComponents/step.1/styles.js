@@ -5,6 +5,7 @@ import { colors } from "../../../constants";
 export default StyleSheet.create({
  container: {
     flex: 1,
+    height: height,
     backgroundColor: colors.bluePrimary
   },
 
@@ -60,10 +61,10 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.06
+    marginBottom: height * 0.30
   },
   bottomContainer: {
-    justifyContent: "flex-end",
+    justifyContent: "center",
     alignItems: "center"
   },
   btnImage: {

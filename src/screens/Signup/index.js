@@ -10,6 +10,7 @@ import StepEight from "../../components/SignupScreenComponents/step.8/index.js";
 import {colors} from "../../constants";
 import styles from "./styles";
 import MultiStep from 'react-native-multistep-wizard';
+import Dummy from "../../components/SignupScreenComponents/dummy/index.js"
 
 
 const steps = [

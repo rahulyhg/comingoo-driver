@@ -1,31 +1,29 @@
 import { Dimensions, StyleSheet } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { colors } from "../../../constants";
-import { Row } from "native-base";
 
 export default StyleSheet.create({
  container: {
     flex: 1,
-    height: height,
+    height : height,
     backgroundColor: colors.bluePrimary
   },
 
   topContainer: {
-    justifyContent: 'center',
-    alignItems : 'center',
-    paddingTop : height * 0.10
+   paddingLeft : width * 0.05 ,
+   paddingTop: height * 0.02,
     
   },
 
   headingTxt: {
-    fontSize : width * 0.13,
+    fontSize : width * 0.10,
    fontWeight: '200',
     color : 'white',
   },
 
   subHeadingTxt: {
-    fontSize : 15,
-    paddingTop: 40,
+    fontSize : 17,
+    paddingTop: 5,
     paddingLeft: 3,
     color : '#E5E5E5',
     
@@ -47,6 +45,12 @@ export default StyleSheet.create({
     fontSize: width * 0.04
   },
 
+  labelStyleDropdown : {
+    color: colors.light,
+    fontSize: width * 0.04,
+    paddingTop : 20,
+  },
+
   inputs: {
     marginTop: "10%"
   },
@@ -54,6 +58,17 @@ export default StyleSheet.create({
   inputStyle: {
     color: colors.light
   },
+
+  upBtn : {
+    backgroundColor: colors.light,
+    width: 60,
+    height: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 1000,
+    marginBottom: height * 0.06
+  },
+
   nextBtn: {
     backgroundColor: colors.light,
     width: 60,
@@ -61,9 +76,9 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.30,
-    marginLeft : 5
+    marginBottom: height * 0.06,
   },
+
   backBtn : {
     backgroundColor: colors.light,
     width: 60,
@@ -71,8 +86,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.30,
-    marginRight : 5
+    marginBottom: height * 0.06,
   },
 
   bottomContainer: {
@@ -80,11 +94,13 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+
   btnImage: {
     width: "80%",
     height: "60%",
    
   },
+  
   btnImageLeft: {
     width: "80%",
     height: "60%",

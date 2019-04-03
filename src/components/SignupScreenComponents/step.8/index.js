@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView, Image, TouchableOpacity, Button } from "react-native";
+import { Text, View, ScrollView, Image, TouchableOpacity, Button, Alert } from "react-native";
 import styles from "./styles";
 import { Item, Label, Input, Toast } from "native-base";
 import { icons } from "../../../utils/";
@@ -34,10 +34,15 @@ export default class Step8 extends React.Component {
 
        // Go to next step
        this.props.nextFn()
+
+       //Success Alert
+       Alert.alert(
+        'Successfully Registered'
+      );
     }
     else {
       return Toast.show({
-        text: 'One of the field is missing',
+        text: 'You forgot to upload your Drivers License image',
         type: "warning",
         duration: 3000,
         buttonText: 'Okay'

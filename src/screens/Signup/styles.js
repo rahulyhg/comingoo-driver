@@ -7,8 +7,7 @@ import { colors } from "../../constants";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    height: height,
-    width: width,
+    
   },
   headerStyle: {
     backgroundColor: colors.bluePrimary,
