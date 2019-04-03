@@ -3,6 +3,7 @@ const { width, height } = Dimensions.get("window");
 import { colors } from "../../../constants";
 
 export default StyleSheet.create({
+
  container: {
     flex: 1,
     backgroundColor: colors.bluePrimary,
@@ -20,8 +21,6 @@ export default StyleSheet.create({
    fontWeight: '200',
     color : 'white',
   },
-
-  
 
   middleContainer: {
     flex: 2.8,
@@ -51,6 +50,7 @@ export default StyleSheet.create({
   inputStyle: {
     color: colors.light
   },
+  
   nextBtn: {
     backgroundColor: colors.light,
     width: 60,

@@ -3,6 +3,7 @@ const { width, height } = Dimensions.get("window");
 import { colors } from "../../../constants";
 
 export default StyleSheet.create({
+
  container: {
     flex: 1,
     backgroundColor: colors.bluePrimary,
@@ -26,7 +27,6 @@ export default StyleSheet.create({
     paddingTop: 5,
     paddingLeft: 3,
     color : '#E5E5E5',
-    
   },
 
   middleContainer: {
@@ -108,4 +108,5 @@ export default StyleSheet.create({
     height: "60%",
     transform: [{ rotate: '180deg'}]
   }
+  
 });

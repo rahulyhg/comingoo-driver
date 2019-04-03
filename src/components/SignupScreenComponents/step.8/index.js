@@ -1,10 +1,9 @@
 import React from 'react';
-import { Text, View, ScrollView, Image, TouchableOpacity, Button, Alert } from "react-native";
+import { Text, View, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import styles from "./styles";
-import { Item, Label, Input, Toast } from "native-base";
+import { Toast } from "native-base";
 import { icons } from "../../../utils/";
 import ImagePicker from 'react-native-image-picker'
-
 
 export default class Step8 extends React.Component {
 
@@ -25,7 +24,7 @@ export default class Step8 extends React.Component {
         this.setState({ photo: response })
       }
     })
-}
+   }
 
   next = () => {
     if(this.state.photo != null){
@@ -55,8 +54,11 @@ export default class Step8 extends React.Component {
    }
 
   render() {
+
     const { photo } = this.state ;
+
     return (
+      
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topContainer}>

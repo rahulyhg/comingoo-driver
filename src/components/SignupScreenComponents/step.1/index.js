@@ -30,9 +30,7 @@ export default class Step1 extends React.Component {
         buttonText: 'Okay'
       })
     }
-
-  
-  }
+}
 
   render() {
    

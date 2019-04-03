@@ -54,6 +54,7 @@ export default StyleSheet.create({
   inputStyle: {
     color: colors.light
   },
+
   nextBtn: {
     backgroundColor: colors.light,
     width: 60,
@@ -63,10 +64,12 @@ export default StyleSheet.create({
     borderRadius: 1000,
     marginBottom: height * 0.30
   },
+
   bottomContainer: {
     justifyContent: "center",
     alignItems: "center"
   },
+  
   btnImage: {
     width: "80%",
     height: "60%"

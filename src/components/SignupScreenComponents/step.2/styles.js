@@ -1,7 +1,6 @@
 import { Dimensions, StyleSheet } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { colors } from "../../../constants";
-import { Row } from "native-base";
 
 export default StyleSheet.create({
  container: {
@@ -54,6 +53,7 @@ export default StyleSheet.create({
   inputStyle: {
     color: colors.light
   },
+
   nextBtn: {
     backgroundColor: colors.light,
     width: 60,
@@ -64,6 +64,7 @@ export default StyleSheet.create({
     marginBottom: height * 0.30,
     marginLeft : 5
   },
+
   backBtn : {
     backgroundColor: colors.light,
     width: 60,
@@ -80,6 +81,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+
   btnImage: {
     width: "80%",
     height: "60%",

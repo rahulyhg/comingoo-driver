@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Item, Label, Input, Toast } from "native-base";
-import { icons } from "../../../utils/"
+import { icons } from "../../../utils/";
 
 export default class Step3 extends React.Component {
 

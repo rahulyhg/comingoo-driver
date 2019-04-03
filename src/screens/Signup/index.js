@@ -10,8 +10,6 @@ import StepEight from "../../components/SignupScreenComponents/step.8/index.js";
 import {colors} from "../../constants";
 import styles from "./styles";
 import MultiStep from 'react-native-multistep-wizard';
-import Dummy from "../../components/SignupScreenComponents/dummy/index.js"
-
 
 const steps = [
   {name: 'StepOne', component: <StepOne/>},
@@ -22,26 +20,22 @@ const steps = [
   {name: 'StepSix', component: <StepSix/>},
   {name: 'StepSeven', component: <StepSeven/>},
   {name: 'StepEight', component: <StepEight/>},
-
 ];
 
 export default class Signup extends React.Component {
 
-
-  static navigationOptions = navigation => ({
+static navigationOptions = navigation => ({
     headerTintColor: colors.light,
     headerStyle: styles.headerStyle
   });
 
 finish(wizardState){
   //code to be executed when wizard is finished
-          
       }
 
   render() {
     return (
          <MultiStep steps={steps} onFinish={this.finish}/>
-        //  <StepEight />
     );
   }
 }

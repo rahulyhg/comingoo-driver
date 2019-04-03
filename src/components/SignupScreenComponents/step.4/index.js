@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView, Image, TouchableOpacity, Picker } from "react-native";
+import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Item, Label, Input, Toast } from "native-base";
 import { icons } from "../../../utils/";
