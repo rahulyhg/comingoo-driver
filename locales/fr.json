@@ -18,7 +18,8 @@
     "login": "Se connecter",
     "phone_number": "Numéro de téléphone",
     "password": "Mot de passe",
-    "forgot_password": "Mot de passe oublié ? "
+    "forgot_password": "Mot de passe oublié ? ",
+    "click_here": "Cliquez ici"
   },
   "signup": {
     "login": "Se connecter",
