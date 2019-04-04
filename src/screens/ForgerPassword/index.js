@@ -25,7 +25,7 @@ export class ForgetPassword extends Component {
   });
 
   resetPassword = () => {
-    const { number, password } = this.state;
+    const { number } = this.state;
     if (!number) {
       this.setState({
         numberError: !number
