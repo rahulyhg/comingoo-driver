@@ -4,6 +4,8 @@ import { Root } from "native-base";
 
 import { store } from "../store";
 import AppNavigator from "../navigations/index";
+import AppDrawer from "../navigations/index";
+
 
 export default class index extends Component {
   render() {
