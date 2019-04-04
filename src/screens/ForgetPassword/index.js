@@ -9,6 +9,8 @@ import { icons } from "../../utils";
 
 import { handlers } from "../../helpers";
 
+import { strings } from "../../i18n";
+
 export class ForgetPassword extends Component {
   constructor(props) {
     super(props);
@@ -31,12 +33,12 @@ export class ForgetPassword extends Component {
         numberError: !number
       });
       return handlers.showToast(
-        "S'il vous plait, entrez votre numéro de téléphone!",
+        strings("forgot_password.missing_phone_number"),
         "danger"
       );
     }
 
-    handlers.showToast("un SMS est envoyé sur votre numéro", "success");
+    handlers.showToast(strings('forgot_password.success_sent_sms'), "success");
     this.navigate("Login");
   };
 
@@ -51,13 +53,13 @@ export class ForgetPassword extends Component {
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <Text style={styles.headingTxt}>
-            réinitialisez votre mot de passe
+            {strings('forgot_password.reset_your_password')}
           </Text>
         </View>
         <View style={styles.middleContainer}>
           <View style={styles.fieldContainer}>
             <Item stackedLabel style={styles.inputs} error={numberError}>
-              <Label style={styles.labelStyle}>Numéro de téléphone</Label>
+              <Label style={styles.labelStyle}>{strings('forgot_password.phone_number')}</Label>
               <Input
                 style={styles.inputStyle}
                 keyboardType="phone-pad"
