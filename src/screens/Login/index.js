@@ -36,6 +36,10 @@ class Login extends React.Component {
         passwordError: !password
       });
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
+    } 
+    else {
+      this.navigate("Dashboard");
+      
     }
 
     // const { onLogin } = this.props;
