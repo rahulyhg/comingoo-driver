@@ -45,9 +45,6 @@ export default StyleSheet.create({
   inputs: {
     marginTop: "10%"
   },
-  inputStyle: {
-    color: colors.light
-  },
   forgetTxtContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -80,5 +77,19 @@ export default StyleSheet.create({
   btnImage: {
     width: "80%",
     height: "60%"
+  },
+  numberContainer: {
+    flex: 1,
+    alignItems: "center",
+    height: "100%",
+    justifyContent: "space-between"
+  },
+  inputStyle: {
+    width: width * 0.8,
+    color: colors.light
+  },
+  newPassword: {
+    flex: 1,
+    justifyContent: "space-between"
   }
 });

@@ -38,8 +38,8 @@ class Login extends React.Component {
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
     }
 
-    // const { onLogin } = this.props;
-    // onLogin();
+    const { onLogin } = this.props;
+    onLogin();
   };
 
   navigate = route => {
