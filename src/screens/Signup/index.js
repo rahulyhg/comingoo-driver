@@ -1,25 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+
+import { strings } from "../../i18n";
+import styles from "./styles";
 
 export default class Signup extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-      <Text> Signup Screen </Text>
-      <Button
-          title="Login"
-          onPress={() => this.props.navigation.navigate('Login')}
+        <Text>{strings("signup.signup")}</Text>
+        <Button
+          title={strings("signup.login")}
+          onPress={() => this.props.navigation.navigate("Login")}
         />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
