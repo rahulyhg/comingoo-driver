@@ -31,7 +31,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFirebasePackage(),
             new RNGestureHandlerPackage(),
             new RNFirebaseAuthPackage(),
-            new RNGestureHandlerPackage(),
             new RNI18nPackage()
       );
     }
