@@ -68,7 +68,7 @@ export default class Step5 extends React.Component {
     }];
    
     return (
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
+      
         <View style={styles.container}>
           <View style={styles.topContainer}>
             <Text style={styles.headingTxt}>Car Information</Text>
@@ -129,7 +129,7 @@ export default class Step5 extends React.Component {
             </View>
          
         </View>
-      </ScrollView>
+     
     );
   }
 }

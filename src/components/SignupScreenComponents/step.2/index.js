@@ -39,7 +39,6 @@ export default class Step2 extends React.Component {
   render() {
    
     return (
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topContainer}>
             <Text style={styles.headingTxt}>Sign up</Text>
@@ -77,7 +76,6 @@ export default class Step2 extends React.Component {
             </View>
          
         </View>
-      </ScrollView>
     );
   }
 }

@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { colors } from "../../../constants";
 
@@ -7,7 +7,14 @@ export default StyleSheet.create({
  container: {
     flex: 1,
     backgroundColor: colors.bluePrimary,
-    height : height,
+    ...Platform.select({
+      ios: {
+       height : height
+      },
+      android: {
+       
+      },
+    }),
   },
 
   topContainer: {
@@ -23,7 +30,6 @@ export default StyleSheet.create({
   },
 
   middleContainer: {
-    flex: 2.8,
     alignItems: "center",
     position: "relative",
     justifyContent: "space-between"
@@ -59,7 +65,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.16,
+    //bottom:  (Platform.OS === 'ios') ? height * 0.16 : 0,
     marginLeft : 5,
   },
 
@@ -70,14 +76,16 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.16,
+    //bottom:  (Platform.OS === 'ios') ? height * 0.16 : 0,
     marginRight : 5
   },
 
   bottomContainer: {
+    
     flexDirection: 'row',
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    paddingTop : (Platform.OS === 'ios') ?  25 : 25,
   },
 
   btnImage: {

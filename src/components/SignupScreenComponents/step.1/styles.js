@@ -1,12 +1,14 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
 import { colors } from "../../../constants";
+
 
 export default StyleSheet.create({
  container: {
     flex: 1,
     height: height,
     backgroundColor: colors.bluePrimary
+    //backgroundColor : (Platform.OS === 'ios') ? 'red' : 'green'
   },
 
   topContainer: {
@@ -44,7 +46,7 @@ export default StyleSheet.create({
 
   labelStyle: {
     color: colors.light,
-    fontSize: width * 0.04
+    fontSize: width * 0.04,
   },
 
   inputs: {
@@ -52,7 +54,8 @@ export default StyleSheet.create({
   },
 
   inputStyle: {
-    color: colors.light
+    color: colors.light,
+    
   },
 
   nextBtn: {

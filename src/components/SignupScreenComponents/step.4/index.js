@@ -62,7 +62,7 @@ export default class Step4 extends React.Component {
     }];
    
     return (
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
+      
         <View style={styles.container}>
           <View style={styles.topContainer}>
             <Text style={styles.headingTxt}>Personal Information</Text>
@@ -106,9 +106,9 @@ export default class Step4 extends React.Component {
                     onChangeText={bankName => this.setState({ bankName })}
                   />
              </View>
-             </View>
-         
-             <View style={styles.bottomContainer}>
+            
+            </View>
+            <View style={styles.bottomContainer}>
              <TouchableOpacity
                style={styles.backBtn} 
                onPress={()=> this.back()}>
@@ -121,9 +121,10 @@ export default class Step4 extends React.Component {
               <Image style={styles.btnImage} source={icons.right_arrow} />
               </TouchableOpacity>
             </View>
+           
          
         </View>
-      </ScrollView>
+    
     );
   }
 }
