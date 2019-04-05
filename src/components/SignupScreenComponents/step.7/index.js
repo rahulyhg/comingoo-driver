@@ -77,7 +77,7 @@ export default class Step7 extends React.Component {
         <View style={styles.container}>
           <View style={styles.topContainer}>
             <Text style={styles.headingTxt}>Vehicle Registration Certificate</Text>
-            <Text style={styles.subHeadingTxt}>Upload image of your Vehicle Registration Certificate (Both Side)</Text>
+            <Text style={styles.subHeadingTxt}>Upload images of your Vehicle Registration Certificate (Both Side)</Text>
           </View>
 
           <View style={styles.middleContainer}>

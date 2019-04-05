@@ -71,7 +71,7 @@ export default class Step6 extends React.Component {
           <View style={styles.topContainer}>
             <Text style={styles.headingTxt}>Personal Identification Card</Text>
             <Text style={styles.subHeadingTxt}>
-              Upload image of your ID (Both Side)
+              Upload images of your ID (Both Side)
             </Text>
           </View>
 

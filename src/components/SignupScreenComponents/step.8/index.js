@@ -80,7 +80,7 @@ export default class Step8 extends React.Component {
         <View style={styles.container}>
           <View style={styles.topContainer}>
             <Text style={styles.headingTxt}>Driving License</Text>
-            <Text style={styles.subHeadingTxt}>Upload image of your Driving License (Both Side)</Text>
+            <Text style={styles.subHeadingTxt}>Upload images of your Driving License (Both Side)</Text>
           </View>
 
           <View style={styles.middleContainer}>
