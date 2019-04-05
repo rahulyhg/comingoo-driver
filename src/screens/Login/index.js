@@ -37,7 +37,10 @@ class Login extends React.Component {
         passwordError: !password
       });
       return handlers.showToast(strings("login.missing_input"), "danger");
+    } else {
+      this.props.navigation.navigate('Map');
     }
+
 
     // const { onLogin } = this.props;
     // onLogin();
