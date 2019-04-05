@@ -1,10 +1,11 @@
 import React from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import { Text, View, TouchableOpacity, Image, Platform } from "react-native";
 import { connect } from "react-redux";
 import { Item, Label, Input } from "native-base";
 import firebase from "react-native-firebase";
 
 import { handlers } from "../../helpers";
+import { confirmCode, signIn } from '../../config/firebase'
 
 import styles from "./styles";
 import { colors } from "../../constants";
@@ -55,7 +56,13 @@ class Signup extends React.Component {
     }
 
     try {
-      this.verifyPhoneNumber(number);
+      if (Platform.OS == 'android') {
+        this.verifyPhoneNumber(number);
+      } else {
+        const confirmResult = await signIn(number);
+        this.setState({ confirmResult })
+        this.next()
+      }
     } catch (error) {
       console.log("TCL: Signup -> sendOTP -> error", error);
       handlers.showToast(error.message, "danger");
@@ -70,6 +77,7 @@ class Signup extends React.Component {
         "state_changed",
         phoneAuthSnapshot => {
           console.log("TCL: phoneAuthSnapshot", phoneAuthSnapshot);
+          this.setState({ confirmResult: phoneAuthSnapshot })
           switch (phoneAuthSnapshot.state) {
             case firebase.auth.PhoneAuthState.CODE_SENT: // or 'sent'
               handlers.showToast("Code send!", "success");
@@ -102,6 +110,28 @@ class Signup extends React.Component {
         }
       );
   };
+
+  verifyOTP = async () => {
+    const { otp, confirmResult } = this.state
+    if (!otp) {
+      return handlers.showToast(
+        "S'il vous plaît entrez d'abord OTP",
+        "danger"
+      );
+    }
+
+    const payload = {
+      confirmResult, otp
+    }
+    try {
+      const user = await confirmCode(payload)
+      console.log(user)
+      this.next()
+    } catch (error) {
+      console.log('error', error)
+      handlers.showToast(error.message, 'danger')
+    }
+  }
 
   newPassword = () => {
     const { passwordError, password, cPassword, showPassword } = this.state;
@@ -196,16 +226,16 @@ class Signup extends React.Component {
             {step == 1
               ? "réinitialisez votre mot de passe"
               : step == 2
-              ? "réinitialisez votre mot de passe"
-              : "Entrez votre nouveau mot de passe"}
+                ? "réinitialisez votre mot de passe"
+                : "Entrez votre nouveau mot de passe"}
           </Text>
         </View>
         <View style={styles.middleContainer}>
           {step == 1
             ? this.numberInput()
             : step == 2
-            ? this.otpInput()
-            : this.newPassword()}
+              ? this.otpInput()
+              : this.newPassword()}
         </View>
       </View>
     );
