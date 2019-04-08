@@ -8,6 +8,11 @@ export default StyleSheet.create({
     backgroundColor: colors.bluePrimary,
     elevation: 0,
     shadowOpacity: 0
-  },
-  
+  }, container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
+  }
+
 });

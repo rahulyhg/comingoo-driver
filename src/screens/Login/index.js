@@ -9,6 +9,7 @@ import styles from "./styles";
 import { colors } from "../../constants";
 import { icons } from "../../utils";
 import { handlers } from "../../helpers";
+import { strings } from "../../i18n";
 
 class Login extends React.Component {
   constructor(props) {
@@ -36,14 +37,15 @@ class Login extends React.Component {
         passwordError: !password
       });
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
-    } 
+    }
     else {
       this.navigate("Dashboard");
-      
+
+      return handlers.showToast(strings("login.missing_input"), "danger");
     }
 
-    // const { onLogin } = this.props;
-    // onLogin();
+    const { onLogin } = this.props;
+    onLogin();
   };
 
   navigate = route => {
@@ -63,12 +65,12 @@ class Login extends React.Component {
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topContainer}>
-            <Text style={styles.headingTxt}>Se connecter</Text>
+            <Text style={styles.headingTxt}>{strings('login.login')}</Text>
           </View>
           <View style={styles.middleContainer}>
             <View style={styles.fieldContainer}>
               <Item stackedLabel style={styles.inputs} error={numberError}>
-                <Label style={styles.labelStyle}>Numéro de téléphone</Label>
+                <Label style={styles.labelStyle}>{strings('login.phone_number')}</Label>
                 <Input
                   style={styles.inputStyle}
                   keyboardType="phone-pad"
@@ -78,7 +80,7 @@ class Login extends React.Component {
                 />
               </Item>
               <View stackedLabel style={styles.inputs}>
-                <Label style={styles.labelStyle}>Mot de passe</Label>
+                <Label style={styles.labelStyle}>{strings('login.password')}</Label>
                 <Item error={passwordError}>
                   <Input
                     style={styles.inputStyle}
@@ -97,11 +99,11 @@ class Login extends React.Component {
                 </Item>
               </View>
               <View style={styles.forgetTxtContainer}>
-                <Text style={styles.smallTxt}>Mot de passe oublié ? </Text>
+                <Text style={styles.smallTxt}>{strings('login.forgot_password')}</Text>
                 <TouchableOpacity
                   onPress={() => this.navigate("ForgetPassword")}
                 >
-                  <Text style={styles.mediumTxt}>Cliquez ici</Text>
+                  <Text style={styles.mediumTxt}>{strings('login.click_here')}</Text>
                 </TouchableOpacity>
               </View>
             </View>
