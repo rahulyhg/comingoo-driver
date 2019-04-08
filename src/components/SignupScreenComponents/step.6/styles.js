@@ -36,14 +36,6 @@ export default StyleSheet.create({
     paddingLeft: 3,
     color: "#E5E5E5"
   },
-
-  // middleContainer: {
-  //   flex: 2.8,
-  //   alignItems: "center",
-  //   position: "relative",
-  //   justifyContent: "space-between"
-  // },
-
   fieldContainer: {
     width: "80%"
   },

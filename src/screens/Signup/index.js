@@ -12,17 +12,25 @@ import styles from "./styles";
 import MultiStep from "react-native-multistep-wizard";
 
 const steps = [
-  { name: "StepEight", component: <StepEight /> },
   { name: "StepOne", component: <StepOne /> },
   { name: "StepTwo", component: <StepTwo /> },
   { name: "StepThree", component: <StepThree /> },
   { name: "StepFour", component: <StepFour /> },
   { name: "StepFive", component: <StepFive /> },
   { name: "StepSix", component: <StepSix /> },
-  { name: "StepSeven", component: <StepSeven /> }
+  { name: "StepSeven", component: <StepSeven /> },
+  { name: "StepEight", component: <StepEight /> }
 ];
 
 export default class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      confirm: ""
+    };
+  }
+
   static navigationOptions = navigation => ({
     headerTintColor: colors.light,
     headerStyle: styles.headerStyle
@@ -33,6 +41,6 @@ export default class Signup extends React.Component {
   }
 
   render() {
-    return <MultiStep steps={steps} onFinish={this.finish} />;
+    return <MultiStep steps={steps} onFinish={this.finish} confirm="caca" />;
   }
 }

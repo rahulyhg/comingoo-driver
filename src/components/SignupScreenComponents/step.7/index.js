@@ -77,58 +77,6 @@ export default class Step7 extends React.Component {
     const { images } = this.state;
 
     return (
-      // <ScrollView contentContainerStyle={{ flex: 1 }}>
-      //   <View style={styles.container}>
-      //     <View style={styles.topContainer}>
-      //       <Text style={styles.headingTxt}>
-      //         Vehicle Registration Certificate
-      //       </Text>
-      //       <Text style={styles.subHeadingTxt}>
-      //         Upload images of your Vehicle Registration Certificate (Both Side)
-      //       </Text>
-      //     </View>
-
-      //     <View style={styles.middleContainer}>
-      //       <View
-      //         style={{
-      //           flex: 1,
-      //           flexDirection: "row",
-      //           color: "white",
-      //           alignItems: "center",
-      //           justifyContent: "center"
-      //         }}
-      //       >
-      //         {this.state.images
-      //           ? this.state.images.map(i => (
-      //               <View key={i.uri}>{this.renderAsset(i)}</View>
-      //             ))
-      //           : null}
-      //       </View>
-      //       <TouchableOpacity
-      //         style={styles.upBtn}
-      //         onPress={() => this.handleChoosePhoto()}
-      //       >
-      //         <Image style={styles.btnImage} source={icons.upload_icon} />
-      //       </TouchableOpacity>
-      //     </View>
-      //     <View style={styles.bottomContainer}>
-      //       <TouchableOpacity
-      //         style={styles.backBtn}
-      //         onPress={() => this.back()}
-      //       >
-      //         <Image style={styles.btnImageLeft} source={icons.right_arrow} />
-      //       </TouchableOpacity>
-
-      //       <TouchableOpacity
-      //         style={styles.nextBtn}
-      //         onPress={() => this.next()}
-      //       >
-      //         <Image style={styles.btnImage} source={icons.right_arrow} />
-      //       </TouchableOpacity>
-      //     </View>
-      //   </View>
-      // </ScrollView>
-
       <View style={styles.container}>
         <View style={styles.topContainer}>
           <Text style={styles.headingTxt}>

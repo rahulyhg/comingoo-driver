@@ -37,14 +37,6 @@ export default StyleSheet.create({
     color: "#E5E5E5",
     textAlign: "center"
   },
-
-  // middleContainer: {
-  //   flex: 2.8,
-  //   alignItems: "center",
-  //   position: "relative",
-  //   justifyContent: "space-between"
-  // },
-
   fieldContainer: {
     width: "80%"
   },
