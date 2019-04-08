@@ -6,12 +6,12 @@ import Home from "../screens/Home";
 import ForgetPassword from "../screens/ForgerPassword";
 
 // For app drawer
-
+import SideMenu from '../components/SideMenu/index'
 import Dashboard from "../screens/Dashboard";
 import History from "../screens/History";
 import Aide from "../screens/Aide";
 import ComingooYou from "../screens/Comingoo_you";
-import Inbox from "../screens/Inbox"
+import Inbox from "../screens/Inbox";
 
 const AppDrawer = createDrawerNavigator(
   {
@@ -31,6 +31,9 @@ const AppDrawer = createDrawerNavigator(
       screen: Inbox
     }
   },
+  {
+    contentComponent: SideMenu,
+  }
 );
 
 const MainStack = createStackNavigator(
