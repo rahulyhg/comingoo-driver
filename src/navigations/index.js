@@ -1,27 +1,28 @@
-import { createAppContainer, createStackNavigator } from "react-navigation";
+import { createAppContainer, createStackNavigator} from 'react-navigation';
+import Login from '../screens/Login';
+import Signup from '../screens/Signup';
+import Home from '../screens/Home';
 
-import Login from "../screens/Login";
-import Signup from "../screens/Signup";
-import Home from "../screens/Home";
-import ForgetPassword from "../screens/ForgetPassword";
-import Dashboard from "../screens/Dashboard"
 
-const AppNavigator = createStackNavigator(
-  {
+const AppNavigator = createStackNavigator({
+     
     Home: {
-      screen: Home,
-      navigationOptions: {
-        header: null
-      }
+        screen: Home,
+        navigationOptions: {
+            header: null,
+          }
+      },
+
+    Login: {
+      screen: Login,
     },
-    Login: { screen: Login },
-    Signup: { screen: Signup },
-    ForgetPassword: { screen: ForgetPassword },
-    Dashboard: { screen: Dashboard }
-  },
-  {
-    initialRouteName: "Home"
-  }
-);
+    
+    Signup: {
+      screen: Signup,
+    },
+      }, {
+          initialRouteName: 'Home',
+      }
+      );
 
 export default createAppContainer(AppNavigator);
