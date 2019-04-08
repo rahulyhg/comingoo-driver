@@ -1,9 +1,12 @@
 import React from 'react';
-import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Item, Label, Input, Toast } from "native-base";
 import { icons } from "../../../utils/";
 import { Dropdown } from 'react-native-material-dropdown';
+import data_gender from '../../../constants/gender';
+import data_city from '../../../constants/city';
+import data_bank_name from '../../../constants/bankName';
 
 export default class Step4 extends React.Component {
 
@@ -43,24 +46,6 @@ export default class Step4 extends React.Component {
 
   render() {
 
-    let data_gender = [{
-      value: 'Male',
-    }, {
-      value: 'Female',
-    }];
-
-    let data_city = [{
-      value: 'City1',
-    }, {
-      value: 'City2',
-    }];
-
-    let data_bankName = [{
-      value: 'Bank1',
-    }, {
-      value: 'Bank2',
-    }];
-   
     return (
       
         <View style={styles.container}>
@@ -102,7 +87,7 @@ export default class Step4 extends React.Component {
 
              <Label style={styles.labelStyleDropdown}>Bank Name</Label>
                 <Dropdown
-                    data={data_bankName}
+                    data={data_bank_name}
                     onChangeText={bankName => this.setState({ bankName })}
                   />
              </View>
