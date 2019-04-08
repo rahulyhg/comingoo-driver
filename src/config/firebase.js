@@ -11,7 +11,7 @@ export const signIn = async phoneNumber => {
   }
 };
 
-export const confirmCode = async payload => {
+export const confirmCode = async payload => { 
   const { otp, confirmResult } = payload;
   console.log("TCL: confirmResult", confirmResult);
   console.log("TCL: otp", otp);
