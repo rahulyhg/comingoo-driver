@@ -32,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new PickerPackage(),
             new RNGestureHandlerPackage(),
-            new ImagePickerPackage()
+            new ImagePickerPackage(),
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage(),
             new RNI18nPackage()
