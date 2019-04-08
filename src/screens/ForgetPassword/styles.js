@@ -85,7 +85,7 @@ export default StyleSheet.create({
     justifyContent: "space-between"
   },
   inputStyle: {
-    width: width * 0.8,
+    width: width * 0.8, 
     color: colors.light
   },
   newPassword: {
