@@ -13,9 +13,9 @@ import ProfileComponent from '../../components/SideMenu/profile'
 import DrawerItem from '../../components/SideMenu/drawer'
 
 const userData = {
-  profileUrl: 'https://s-media-cache-ak0.pinimg.com/736x/a3/e3/d6/a3e3d67e30105ca1688565e484370ab8--social-networks-harry-potter.jpg',
-  username: 'Emma',
-  email: 'ewatson@gryffindor.io'
+  profileUrl: 'https://avatars3.githubusercontent.com/u/11048415?s=460&v=4',
+  username: 'Motasim',
+  email: 'motasim@test.test'
 }
 
 
