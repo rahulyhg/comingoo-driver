@@ -3,7 +3,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
 import Home from "../screens/Home";
-import ForgetPassword from "../screens/ForgerPassword";
+import ForgetPassword from "../screens/ForgetPassword";
 import Dashboard from "../screens/Dashboard"
 
 const AppNavigator = createStackNavigator(
