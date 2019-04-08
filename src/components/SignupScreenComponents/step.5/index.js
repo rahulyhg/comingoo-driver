@@ -1,9 +1,13 @@
 import React from 'react';
-import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Item, Label, Input, Toast } from "native-base";
 import { icons } from "../../../utils/";
 import { Dropdown } from 'react-native-material-dropdown';
+import data_year from '../../../constants/year';
+import data_car_color from '../../../constants/carColor';
+import data_car_brand from '../../../constants/carBrand';
+import data_car_model from '../../../constants/carModel';
 
 export default class Step5 extends React.Component {
 
@@ -43,31 +47,7 @@ export default class Step5 extends React.Component {
 
   render() {
 
-    let data_car_brand = [{
-      value: 'Brand1',
-    }, {
-      value: 'Brand2',
-    }];
-
-    let data_car_model = [{
-      value: 'Model1',
-    }, {
-      value: 'Model2',
-    }];
-
-    let data_car_color = [{
-      value: 'Color1',
-    }, {
-      value: 'Color2',
-    }];
-
-    let data_car_release = [{
-      value: 'Year1',
-    }, {
-      value: 'Year2',
-    }];
-   
-    return (
+   return (
       
         <View style={styles.container}>
           <View style={styles.topContainer}>
@@ -97,7 +77,7 @@ export default class Step5 extends React.Component {
 
               <Label style={styles.labelStyleDropdown}>Year of release</Label>
                 <Dropdown
-                    data={data_car_release}
+                    data={data_year}
                     onChangeText={releaseYear => this.setState({ releaseYear })}
                   />
 
