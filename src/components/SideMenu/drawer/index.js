@@ -7,15 +7,14 @@ import {
   Image,
   StyleSheet
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
 
-const DrawerItem = ({ navigation, name, screenName }) =>
+const DrawerItem = ({ icon, navigation, name, screenName }) =>
   <TouchableOpacity
     style={styles.menuItem}
     onPress={() =>
       navigation.navigate(`${screenName}`, { isStatusBarHidden: false })}
   >
-    {/* <Icon name ={icon} size={25} color="#333" style={{margin:15}} /> */}
+    <Image source={icon} style={{height : 35, width : 35, justifyContent: 'center', alignContent: 'center'}} />
     <Text style={styles.menuItemText}>{name}</Text>
   </TouchableOpacity>
 

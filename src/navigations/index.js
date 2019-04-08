@@ -24,7 +24,7 @@ const AppDrawer = createDrawerNavigator(
     Aide: {
       screen: Aide
     },
-    Comingoo_You: {
+    ComingooYou: {
       screen: ComingooYou
     },
     Inbox: {

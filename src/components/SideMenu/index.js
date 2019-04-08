@@ -6,11 +6,22 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  ImageBackground
 } from "react-native"
 
+//import { icons } from "../../utils";
+import ProfileComponent from '../../components/SideMenu/profile';
+import DrawerItem from '../../components/SideMenu/drawer';
+import styles from './styles';
+import { images } from '../../utils/index';
 
-import ProfileComponent from '../../components/SideMenu/profile'
-import DrawerItem from '../../components/SideMenu/drawer'
+import home_ic from '../../assets/icons/home.png';
+import history_ic from '../../assets/icons/history.png';
+import aide_ic from '../../assets/icons/aide.png';
+import heart_ic from '../../assets/icons/heart.png';
+import inbox_ic from '../../assets/icons/inbox.png'
+
+
 
 const userData = {
   profileUrl: 'https://avatars3.githubusercontent.com/u/11048415?s=460&v=4',
@@ -20,46 +31,30 @@ const userData = {
 
 
 const menuData = [
-  {name:"Dashboard", screenName:"Dashboard", key: 1},
-  {name:"History", screenName:"History", key: 2},
-  {name:"Aide", screenName:"Aide", key: 3},
-  {name:"Comingoo & You", screenName:"ComingooYou", key: 4},
-  {name:"Inbox", screenName:"Inbox", key: 5},
-//   {icon: "ios-chatboxes-outline", name:"Inbox", screenName:"PiedPiper", key: 3},
-//   {icon: "ios-navigate-outline", name:"Trips", screenName:"Hooli", key: 4},
-  
-]
+  {icon: home_ic, name:"Dashboard", screenName:"Dashboard", key: 1},
+  {icon: history_ic, name:"History", screenName:"History", key: 2},
+  {icon: inbox_ic, name:"Inbox", screenName:"Inbox", key: 3},
+  {icon: heart_ic, name:"Comingoo & You", screenName:"ComingooYou", key: 4},
+  {icon: aide_ic, name:"Aide", screenName:"Aide", key: 5},
+  ]
 
 
 
 class SideMenu extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <ImageBackground source={images.drawer_bg} style={styles.container}>
         <ProfileComponent profileUrl={userData.profileUrl} username={userData.username} email={userData.email} />
         <FlatList
           data={menuData}
-          renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} name={item.name} key={item.key} />}
+          renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} icon={item.icon} name={item.name} key={item.key} />}
         />
-      </View>
+      </ImageBackground>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor:'rgba(255,255,255,0.43)'
-  },
-  menuItem: {
-    flexDirection:'row'
-  },
-  menuItemText: {
-    fontSize:15,
-    fontWeight:'300',
-    margin:15,
-  }
-})
+
 
 SideMenu.defaultProps = {};
 
