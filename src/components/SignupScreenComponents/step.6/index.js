@@ -3,14 +3,14 @@ import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { Toast, Row } from "native-base";
 import { icons } from "../../../utils/";
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker from "react-native-image-crop-picker";
 
 export default class Step6 extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      images: null,
+      images: []
     };
   }
 
@@ -19,16 +19,23 @@ export default class Step6 extends React.Component {
       multiple: true,
       waitAnimationEnd: false,
       includeExif: true,
-      forceJpg: true,
-    }).then(images => {
-      this.setState({
-        images: images.map(i => {
-          console.log('received image', i);
-          return {uri: i.path, width: i.width, height: i.height, mime: i.mime};
-        })
-      });
-      }).catch(e => alert(e));
-    };
+      forceJpg: true
+    })
+      .then(images => {
+        this.setState({
+          images: images.map(i => {
+            console.log("received image", i);
+            return {
+              uri: i.path,
+              width: i.width,
+              height: i.height,
+              mime: i.mime
+            };
+          })
+        });
+      })
+      .catch(e => alert(e));
+  };
 
   next = () => {
     if (this.state.images != null) {
@@ -51,61 +58,55 @@ export default class Step6 extends React.Component {
     this.props.prevFn();
   };
 
-    renderAsset(image) {
-      if (image.mime && image.mime.toLowerCase().indexOf('video/') !== -1) {
-        return this.renderVideo(image);
-      }
-
-      return this.renderImage(image);
-  };
-
-    renderImage(image) {
-      return <Image style={{width: 180, height: 180, margin: 1}} source={image} />
+  renderAsset(image) {
+    if (image.mime && image.mime.toLowerCase().indexOf("video/") !== -1) {
+      return this.renderVideo(image);
     }
 
-  render() {
-    
+    return this.renderImage(image);
+  }
+
+  renderImage(image) {
     return (
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
-        <View style={styles.container}>
-          <View style={styles.topContainer}>
-            <Text style={styles.headingTxt}>Personal Identification Card</Text>
-            <Text style={styles.subHeadingTxt}>
-              Upload images of your ID (Both Side)
-            </Text>
-          </View>
+      <Image
+        style={{ width: "100%", height: "100%", margin: 1 }}
+        source={image}
+      />
+    );
+  }
 
-          <View style={styles.middleContainer}>
-            <View
-              style={{
-                flex: 1,
-                flexDirection : 'row',
-                color: "white",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-
-            {this.state.images ? this.state.images.map(i => <View key={i.uri}>{this.renderAsset(i)}</View>) : null}
-
-              
-            </View>
+  render() {
+    const { images } = this.state;
+    return (
+      <View style={styles.container}>
+        <View style={styles.topContainer}>
+          <Text style={styles.headingTxt}>Personal Identification Card</Text>
+          <Text style={styles.subHeadingTxt}>
+            Upload images of your ID (Both Side)
+          </Text>
+        </View>
+        <View style={styles.middleContainer}>
+          <ScrollView contentContainerStyle={styles.imageWrapper}>
+            <Image source={images[0]} style={styles.img} />
+            <Image source={images[1]} style={styles.img} />
+          </ScrollView>
+        </View>
+        <View style={styles.bottomContainer}>
+          <View style={styles.uploadBtnContainer}>
             <TouchableOpacity
-                style={styles.upBtn}
-                onPress={() => this.handleChoosePhoto()}
-              >
-                <Image style={styles.btnImage} source={icons.upload_icon} />
-              </TouchableOpacity>
+              style={styles.upBtn}
+              onPress={() => this.handleChoosePhoto()}
+            >
+              <Image style={styles.btnImage} source={icons.upload_icon} />
+            </TouchableOpacity>
           </View>
-
-          <View style={styles.bottomContainer}>
+          <View style={styles.navBtns}>
             <TouchableOpacity
               style={styles.backBtn}
               onPress={() => this.back()}
             >
               <Image style={styles.btnImageLeft} source={icons.right_arrow} />
             </TouchableOpacity>
-
             <TouchableOpacity
               style={styles.nextBtn}
               onPress={() => this.next()}
@@ -114,7 +115,7 @@ export default class Step6 extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }
