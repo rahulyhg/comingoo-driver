@@ -35,8 +35,7 @@ finish(wizardState){
 
   render() {
     return (
-        //  <MultiStep steps={steps} onFinish={this.finish}/>
-        <StepFive />
+         <MultiStep steps={steps} onFinish={this.finish}/>
     );
   }
 }
