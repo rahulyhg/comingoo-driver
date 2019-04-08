@@ -3,11 +3,17 @@ package com.comingoodriverapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import io.invertase.firebase.RNFirebasePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.imagepicker.ImagePickerPackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +30,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNGestureHandlerPackage()
+            new PickerPackage(),
+            new RNGestureHandlerPackage(),
+            new ImagePickerPackage(),
+            new RNFirebasePackage(),
+            new RNFirebaseAuthPackage(),
+            new RNI18nPackage()
       );
     }
 
