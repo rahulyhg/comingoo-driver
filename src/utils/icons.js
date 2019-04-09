@@ -8,4 +8,5 @@ export default {
   inbox_icon: require("../assets/icons/inbox.png"),
   sout_icon: require("../assets/icons/signout.png"),
   home_icon: require("../assets/icons/home.png"),
+  menubutton: require("../assets/icons/menubtn.png"),
 };

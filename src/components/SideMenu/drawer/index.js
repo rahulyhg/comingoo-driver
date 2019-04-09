@@ -14,19 +14,22 @@ const DrawerItem = ({ icon, navigation, name, screenName }) =>
     onPress={() =>
       navigation.navigate(`${screenName}`, { isStatusBarHidden: false })}
   >
-    <Image source={icon} style={{height : 35, width : 35, justifyContent: 'center', alignContent: 'center'}} />
+    <Image source={icon} style={{height : 35, width : 35}} />
     <Text style={styles.menuItemText}>{name}</Text>
   </TouchableOpacity>
 
 
 const styles = StyleSheet.create({
   menuItem: {
-    flexDirection:'row'
+    flexDirection:'row',
+    alignItems: 'center',
+    
   },
   menuItemText: {
-    fontSize:15,
-    fontWeight:'300',
+    fontSize:17,
+    fontWeight:'500',
     margin:15,
+    color : 'white'
   }
 })
 
