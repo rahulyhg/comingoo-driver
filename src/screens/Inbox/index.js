@@ -8,6 +8,7 @@ import { colors } from "../../constants";
 import { icons } from "../../utils";
 
 import { handlers } from "../../helpers";
+import MenuBtn from '../../components/SideMenu/menu_button';
 
 export class Inbox extends Component {
   constructor(props) {
@@ -32,12 +33,12 @@ export class Inbox extends Component {
   render() {
     const { numberError, number } = this.state;
     return (
-      <View>
-        
-          <Text>
-          Inbox
-          </Text>
-        </View>
+      <View style={styles.container}>
+      <MenuBtn navigation={this.props.navigation} />
+        <Text>
+         Inbox
+        </Text>
+      </View>
 
     );
   }

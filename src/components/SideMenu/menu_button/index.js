@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, TouchableOpacity, StyleSheet } from "react-native";
-import {icons} from '../../../utils/index'
+import {icons} from '../../../utils/index';
+import styles from './styles'
 
 class MenuButton extends React.Component{
 render(){
@@ -19,18 +20,5 @@ render(){
 }
 }
 
-const styles = StyleSheet.create({
-    menuButton : {
-        zIndex: 9,
-        position: 'absolute',
-        top: 45,
-        left: 25,
-        
-    },
-    menuButtonImg : {
-        height : 30,
-        width : 30
-    }
-})
 
 export default MenuButton;
