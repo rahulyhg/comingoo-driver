@@ -23,12 +23,14 @@ const styles = StyleSheet.create({
   menuItem: {
     flexDirection:'row',
     alignItems: 'center',
+    marginBottom: 15,
     
   },
   menuItemText: {
     fontSize:17,
     fontWeight:'500',
     margin:15,
+    
     color : 'white'
   }
 })

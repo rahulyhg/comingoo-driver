@@ -32,7 +32,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderTopWidth: 1,
+        borderTopWidth: 0.7,
         borderTopColor: 'white',
       }
 });
