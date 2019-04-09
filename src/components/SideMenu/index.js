@@ -22,7 +22,7 @@ import logout_ic from '../../assets/icons/signout.png'
 
 const userData = {
   profileUrl: 'https://avatars3.githubusercontent.com/u/11048415?s=460&v=4',
-  username: 'Motasim',
+  username: 'Motasim Foad',
   email: 'motasim@test.test'
 }
 
@@ -41,13 +41,19 @@ class SideMenu extends Component {
   render() {
     return (
       <ImageBackground source={images.drawer_bg} style={styles.container}>
+
       <View style={styles.secondContainer}>
+
       <ProfileComponent profileUrl={userData.profileUrl} username={userData.username} email={userData.email} />
+
         <FlatList
           data={menuData}
+          style={{paddingTop: 95}}
           renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} icon={item.icon} name={item.name} key={item.key} />}
         />
+
       </View>
+
        <TouchableOpacity 
        style={styles.logout}
        onPress={() => this.props.navigation.navigate('Home')}

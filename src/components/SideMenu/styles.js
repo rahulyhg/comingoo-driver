@@ -1,14 +1,14 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-import { colors } from "../../constants";
-
 const { width, height } = Dimensions.get("window");
-import drawer_bg from '../../assets/images/menubg.png';
 
 export default StyleSheet.create({
     container: {
         flex: 1,
-       
+        resizeMode: 'contain',
+        // position : 'absolute',
+        // width : width/1.34,
+        // height : height,
       },
       menuItem: {
         flexDirection:'row',
