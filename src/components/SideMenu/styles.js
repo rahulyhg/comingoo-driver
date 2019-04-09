@@ -9,24 +9,30 @@ export default StyleSheet.create({
     container: {
         flex: 1,
        
-        
-        
-        
       },
       menuItem: {
         flexDirection:'row',
         color : 'white',
       },
       menuItemText: {
-        fontSize:15,
-        fontWeight:'300',
+        fontSize:17,
+        fontWeight:'500',
         margin:15,
-        color: 'white'
+        color : 'white'
       },
       secondContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent : 'center',
         top: 30
+      },
+      logout : {
+        flex : 0.10,
+        
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        borderTopWidth: 1,
+        borderTopColor: 'white',
       }
 });

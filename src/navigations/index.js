@@ -13,6 +13,10 @@ import Aide from "../screens/Aide";
 import ComingooYou from "../screens/Comingoo_you";
 import Inbox from "../screens/Inbox";
 
+import {Platform, Dimensions} from 'react-native';
+
+const WIDTH = Dimensions.get('window').width;
+
 const AppDrawer = createDrawerNavigator(
   {
     Dashboard: {
@@ -33,7 +37,9 @@ const AppDrawer = createDrawerNavigator(
   },
   {
     contentComponent: SideMenu,
-  }
+  },
+  
+  
 );
 
 const MainStack = createStackNavigator(

@@ -1,12 +1,11 @@
 import React, { Component } from "react"
 import {
-  StatusBar,
-  StyleSheet,
+  Image,
   Text,
   TouchableOpacity,
   View,
   FlatList,
-  ImageBackground
+  ImageBackground,
 } from "react-native"
 
 import ProfileComponent from '../../components/SideMenu/profile';
@@ -19,6 +18,7 @@ import history_ic from '../../assets/icons/history.png';
 import aide_ic from '../../assets/icons/aide.png';
 import heart_ic from '../../assets/icons/heart.png';
 import inbox_ic from '../../assets/icons/inbox.png';
+import logout_ic from '../../assets/icons/signout.png'
 
 const userData = {
   profileUrl: 'https://avatars3.githubusercontent.com/u/11048415?s=460&v=4',
@@ -48,7 +48,12 @@ class SideMenu extends Component {
           renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} icon={item.icon} name={item.name} key={item.key} />}
         />
       </View>
-       
+       <TouchableOpacity style={styles.logout}>
+       <Image source={logout_ic} style={{width: 35, height : 35}}/>
+         <Text style={styles.menuItemText}>
+           Se déconnecter
+         </Text>
+       </TouchableOpacity>
       </ImageBackground>
     );
   }
