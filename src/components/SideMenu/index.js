@@ -48,7 +48,10 @@ class SideMenu extends Component {
           renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} icon={item.icon} name={item.name} key={item.key} />}
         />
       </View>
-       <TouchableOpacity style={styles.logout}>
+       <TouchableOpacity 
+       style={styles.logout}
+       onPress={() => this.props.navigation.navigate('Home')}
+       >
        <Image source={logout_ic} style={{width: 35, height : 35}}/>
          <Text style={styles.menuItemText}>
            Se déconnecter
