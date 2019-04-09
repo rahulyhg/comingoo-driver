@@ -39,13 +39,11 @@ class Login extends React.Component {
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
     }
     else {
-      this.navigate("Dashboard");
+      this.props.navigation.navigate('Map');
+      // this.navigate("Dashboard");
 
       return handlers.showToast(strings("login.missing_input"), "danger");
     }
-
-    const { onLogin } = this.props;
-    onLogin();
   };
 
   navigate = route => {

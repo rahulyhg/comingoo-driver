@@ -5,6 +5,7 @@ import Signup from "../screens/Signup";
 import Home from "../screens/Home";
 import ForgetPassword from "../screens/ForgetPassword";
 import Dashboard from "../screens/Dashboard"
+import DriverMap from '../screens/Map';
 
 const AppNavigator = createStackNavigator(
   {
@@ -17,7 +18,8 @@ const AppNavigator = createStackNavigator(
     Login: { screen: Login },
     Signup: { screen: Signup },
     ForgetPassword: { screen: ForgetPassword },
-    Dashboard: { screen: Dashboard }
+    Dashboard: { screen: Dashboard },
+    Map: { screen:  DriverMap}
   },
   {
     initialRouteName: "Home"
