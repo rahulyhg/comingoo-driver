@@ -9,8 +9,8 @@ import {
   Dimensions
 } from "react-native"
 
-import ProfileComponent from '../../components/SideMenu/profile';
-import DrawerItem from '../../components/SideMenu/drawer';
+import ProfileComponent from '../NewSideMenu/profile';
+import DrawerItem from '../NewSideMenu/drawer';
 import styles from './styles';
 import { images } from '../../utils/index';
 
@@ -43,30 +43,32 @@ const menuData = [
 class SideMenu extends Component {
   render() {
     return (
-      <ImageBackground source={images.drawer_bg} style={styles.container}>
+      <View style={styles.mainContainer}>
+        <ImageBackground source={images.drawer_bg} style={styles.container}>
 
-      <View style={styles.secondContainer}>
+        <View style={styles.secondContainer}>
 
-      <ProfileComponent profileUrl={userData.profileUrl} username={userData.username} email={userData.email} />
+        <ProfileComponent profileUrl={userData.profileUrl} username={userData.username} email={userData.email} />
 
-        <FlatList
-          data={menuData}
-          style={{paddingTop: 95}}
-          renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} icon={item.icon} name={item.name} key={item.key} />}
-        />
+          {/* <FlatList
+            data={menuData}
+            style={{paddingTop: 95}}
+            renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} icon={item.icon} name={item.name} key={item.key} />}
+          /> */}
 
+        </View>
+
+        {/* <TouchableOpacity 
+        style={styles.logout}
+        onPress={() => this.props.navigation.navigate('Home')}
+        >
+        <Image source={logout_ic} style={{width: 35, height : 35}}/>
+          <Text style={styles.menuItemText}>
+            Se déconnecter
+          </Text>
+        </TouchableOpacity> */}
+        </ImageBackground>
       </View>
-
-       <TouchableOpacity 
-       style={styles.logout}
-       onPress={() => this.props.navigation.navigate('Home')}
-       >
-       <Image source={logout_ic} style={{width: 35, height : 35}}/>
-         <Text style={styles.menuItemText}>
-           Se déconnecter
-         </Text>
-       </TouchableOpacity>
-      </ImageBackground>
     );
   }
 }

@@ -3,13 +3,18 @@ import { Dimensions, StyleSheet, Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
+    mainContainer:{
+     flex : 1,
+    },
     container: {
         flex: 1,
-        resizeMode: 'stretch',
+       
 
         ...Platform.select({
           android: {
-            width: width/1.11,
+            width: width / 1.117, 
+            height: "100%",
+            resizeMode: 'cover',
           },
         }),
         
@@ -29,9 +34,6 @@ export default StyleSheet.create({
       },
       secondContainer: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent : 'center',
-        top: 30
       },
       logout : {
         flex : 0.10,

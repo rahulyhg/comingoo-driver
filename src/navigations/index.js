@@ -6,7 +6,8 @@ import Home from "../screens/Home";
 import ForgetPassword from "../screens/ForgerPassword";
 
 // For app drawer
-import SideMenu from '../components/SideMenu/index'
+//import SideMenu from '../components/SideMenu/index'
+import SideMenu from '../components/NewSideMenu/index'
 import Dashboard from "../screens/Dashboard";
 import History from "../screens/History";
 import Aide from "../screens/Aide";
@@ -16,6 +17,10 @@ import Inbox from "../screens/Inbox";
 import {Platform, Dimensions} from 'react-native';
 
 const WIDTH = Dimensions.get('window').width;
+
+const DrawerConfig = {
+  drawerWidth : WIDTH - WIDTH/4
+}
 
 const AppDrawer = createDrawerNavigator(
   {
@@ -38,6 +43,9 @@ const AppDrawer = createDrawerNavigator(
   {
     contentComponent: SideMenu,
   },
+  // {
+  //   drawerWidth : WIDTH - WIDTH/4
+  // }
   
   
 );
