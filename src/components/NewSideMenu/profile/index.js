@@ -29,9 +29,24 @@ const ProfileComponent = ({ profileUrl, username, email }) =>
 
 		
 
-  		{/* <View style ={{marginTop : height/35,}}>
+  		<View style ={{
+			 
+			  ...Platform.select({
+				  ios: {
+					marginTop : height/29,
+				  },
+				android: {
+				 left : width/11.5,
+				 marginTop : height/26,
+				},
+			  }),
+			 }}>
 
-    		<Text style={{fontWeight:'500', fontSize:width*0.07, color:'#fff'}}>{username}</Text>
+    		<Text style={{
+				fontWeight: Platform.OS === 'ios' ? '500' : '200',   
+				fontSize: Platform.OS === 'ios' ? width*0.06 : width*0.05,   
+				color:'#fff'
+				}}>{username}</Text>
 		
 			<ImageBackground 
 			source={icons.rating}
@@ -45,7 +60,7 @@ const ProfileComponent = ({ profileUrl, username, email }) =>
 			</ImageBackground>
 		
 		
-		</View> */}
+		</View>
   </View>
 
 
