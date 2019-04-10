@@ -1,12 +1,12 @@
-import { Dimensions, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet, Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export default styles = StyleSheet.create({
     menuButton : {
         zIndex: 9,
         position: 'absolute',
-        top: 45,
-        left: 25,
+        top: height/20,
+        left: width/15,
         
     },
     menuButtonImg : {
