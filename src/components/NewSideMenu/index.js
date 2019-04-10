@@ -51,12 +51,12 @@ class SideMenu extends Component {
 
         <ProfileComponent profileUrl={userData.profileUrl} username={userData.username} email={userData.email} />
 
-          {/* <FlatList
+          <FlatList
             data={menuData}
             style={{
               ...Platform.select({
                 ios: {
-                  paddingTop: height/8,
+                  paddingTop: height/20,
                 },
                 android: {
                   paddingTop: height/30
@@ -71,7 +71,7 @@ class SideMenu extends Component {
             name={item.name} 
             key={item.key} />
           }
-          /> */}
+          />
 
         </View>
 
