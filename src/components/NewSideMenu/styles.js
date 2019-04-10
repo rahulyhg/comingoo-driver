@@ -8,8 +8,6 @@ export default StyleSheet.create({
     },
     container: {
         flex: 1,
-       
-
         ...Platform.select({
           android: {
             width: width / 1.117, 
@@ -35,13 +33,23 @@ export default StyleSheet.create({
       secondContainer: {
         flex: 1,
       },
-      logout : {
+      logoutContainer : {
         flex : 0.10,
+        ...Platform.select({
+          android: {
+            width : width/1.285,
+          },
+        }),
+        borderTopWidth: 0.7,
+        borderTopColor: 'white',
+        
+      },
+      logout : {
+        
         
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderTopWidth: 0.7,
-        borderTopColor: 'white',
+        
       }
 });

@@ -13,7 +13,7 @@ const { width, height } = Dimensions.get("window");
 
 const DrawerItem = ({ icon, navigation, name, screenName }) =>
 <View style={{
-  left : Platform.OS === 'ios' ? width/12.7 : width/6.5,
+  left : Platform.OS === 'ios' ? width/12.7 : width/7.5,
 }}>
 <TouchableOpacity
     style={styles.menuItem}

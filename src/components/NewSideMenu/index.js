@@ -74,16 +74,17 @@ class SideMenu extends Component {
           />
 
         </View>
-
-        {/* <TouchableOpacity 
-        style={styles.logout}
-        onPress={() => this.props.navigation.navigate('Home')}
-        >
-        <Image source={logout_ic} style={{width: 35, height : 35}}/>
-          <Text style={styles.menuItemText}>
-            Se déconnecter
-          </Text>
-        </TouchableOpacity> */}
+          <View style={styles.logoutContainer}>
+          <TouchableOpacity 
+                  style={styles.logout}
+                  onPress={() => this.props.navigation.navigate('Home')}
+                  >
+                  <Image source={logout_ic} style={{width: 35, height : 35}}/>
+                    <Text style={styles.menuItemText}>
+                      Se déconnecter
+                    </Text>
+                  </TouchableOpacity>
+          </View>
         </ImageBackground>
       </View>
     );
