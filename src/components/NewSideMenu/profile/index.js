@@ -9,20 +9,16 @@ import {icons} from '../../../utils/';
 
 
 const ProfileComponent = ({ profileUrl, username, email }) =>
-  <View style={{flexDirection:'row', top: Platform.OS === 'ios' ? width/9 : width/40}}>
+  <View style={{flexDirection:'row', top: Platform.OS === 'ios' ? width/10 : width/40}}>
 
 		<Image source={{uri: profileUrl}} 
-				resizeMode="contain" 
+				
 				style={{
-					...Platform.select({
-						ios: {
-						borderColor:'white', 
-						},
-					}),
 					margin:15, 
-					width:70, 
-					height:70, 
-					borderWidth: Platform.OS === 'ios' ? 2 : 1, 
+					height: Platform.OS === 'ios' ? height/10.8 : height/9, 
+					width: Platform.OS === 'ios' ? width/5 : width/9, 
+					borderColor:'white', 
+					borderWidth: Platform.OS === 'ios' ? 2 : 2, 
 					borderRadius: Platform.OS === 'ios' ? 35 : 1000, }} />
 
 		

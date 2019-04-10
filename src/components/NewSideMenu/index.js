@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Platform,
   FlatList,
   ImageBackground,
   Dimensions
@@ -52,8 +53,24 @@ class SideMenu extends Component {
 
           {/* <FlatList
             data={menuData}
-            style={{paddingTop: 95}}
-            renderItem={({item}) => <DrawerItem navigation={this.props.navigation} screenName={item.screenName} icon={item.icon} name={item.name} key={item.key} />}
+            style={{
+              ...Platform.select({
+                ios: {
+                  paddingTop: height/8,
+                },
+                android: {
+                  paddingTop: height/30
+                },
+              }),
+            }}
+            renderItem={({item}) => 
+            <DrawerItem 
+            navigation={this.props.navigation} 
+            screenName={item.screenName} 
+            icon={item.icon} 
+            name={item.name} 
+            key={item.key} />
+          }
           /> */}
 
         </View>
