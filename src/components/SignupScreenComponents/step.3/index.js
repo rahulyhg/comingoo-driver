@@ -1,7 +1,9 @@
 import React from "react";
 import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
-import styles from "./styles";
 import { Item, Label, Input, Toast } from "native-base";
+
+import { handlers, validations } from "../../../helpers";
+import styles from "./styles";
 import { icons } from "../../../utils/";
 
 export default class Step3 extends React.Component {
@@ -17,24 +19,29 @@ export default class Step3 extends React.Component {
   }
 
   next = () => {
-    if (
-      this.state.name &&
-      this.state.email &&
-      this.state.password &&
-      this.state.confirmpassword != ""
-    ) {
-      // Save step state for use in other steps of the wizard
-      this.props.saveState(0, { key: "value" });
+    const { name, email, password, confirmpassword } = this.state;
+    const data = this.props.getState()[1];
 
-      // Go to next step
+    try {
+      if (!name && !email && !password && !confirmpassword) {
+        throw { message: "Please fill all fields!" };
+      }
+      if (password.length < 6) {
+        throw { message: "your password must be 6 characters long!" };
+      }
+      if (password !== confirmpassword) throw { message: "password mismatch" };
+
+      if (!validations.validateEmail(email)) {
+        throw { message: "Please enter a proper email" };
+      }
+
+      data.fullName = name;
+      data.email = email;
+      data.password = password;
+      this.props.saveState(1, data);
       this.props.nextFn();
-    } else {
-      return Toast.show({
-        text: "One of the field is missing",
-        type: "warning",
-        duration: 3000,
-        buttonText: "Okay"
-      });
+    } catch (error) {
+      handlers.showToast(error.message, "danger");
     }
   };
 
@@ -74,6 +81,7 @@ export default class Step3 extends React.Component {
                 <Label style={styles.labelStyle}>Mot de passe</Label>
                 <Input
                   style={styles.inputStyle}
+                  secureTextEntry={true}
                   onChangeText={password => this.setState({ password })}
                 />
               </Item>
@@ -83,6 +91,7 @@ export default class Step3 extends React.Component {
                 </Label>
                 <Input
                   style={styles.inputStyle}
+                  secureTextEntry={true}
                   onChangeText={confirmpassword =>
                     this.setState({ confirmpassword })
                   }

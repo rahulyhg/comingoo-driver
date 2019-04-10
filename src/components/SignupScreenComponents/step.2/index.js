@@ -20,10 +20,15 @@ export default class Step2 extends React.Component {
   componentDidMount() {
     const confirmResult = this.props.getState()[0];
     this.setState({ confirmResult });
+    console.log(
+      "TCL: Step2 -> componentDidMount -> confirmResult",
+      confirmResult
+    );
   }
 
   verifyOTP = async () => {
     const { otp, confirmResult } = this.state;
+
     if (!otp) {
       return handlers.showToast("S'il vous plaît entrez d'abord OTP", "danger");
     }
@@ -34,28 +39,10 @@ export default class Step2 extends React.Component {
     };
     try {
       const user = await confirmCode(payload);
-      console.log(user);
       this.props.nextFn();
     } catch (error) {
       console.log("error", error);
       handlers.showToast(error.message, "danger");
-    }
-  };
-
-  next = () => {
-    if (this.state.otp != "") {
-      // Save step state for use in other steps of the wizard
-      this.props.saveState(0, { key: "value" });
-
-      // Go to next step
-      this.props.nextFn();
-    } else {
-      return Toast.show({
-        text: "OTP missing",
-        type: "warning",
-        duration: 3000,
-        buttonText: "Okay"
-      });
     }
   };
 

@@ -38,11 +38,16 @@ export default class Step6 extends React.Component {
   };
 
   next = () => {
-    if (this.state.images != null) {
-      // Save step state for use in other steps of the wizard
-      this.props.saveState(0, { key: "value" });
+    const { images } = this.state;
+    const data = this.props.getState()[1];
 
-      // Go to next step
+    if (images.length >= 2) {
+      data.idCardImages = {
+        frontUrl: ".com",
+        backUrl: ".com"
+      };
+      this.props.saveState(0, data);
+
       this.props.nextFn();
     } else {
       return Toast.show({

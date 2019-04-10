@@ -1,9 +1,10 @@
 import React from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
-import styles from "./styles";
 import { Item, Label, Input, Toast } from "native-base";
-import { icons } from "../../../utils/";
 import { Dropdown } from "react-native-material-dropdown";
+import { handlers } from "../../../helpers";
+import styles from "./styles";
+import { icons } from "../../../utils/";
 import data_gender from "../../../constants/gender";
 import data_city from "../../../constants/city";
 import data_bank_name from "../../../constants/bankName";
@@ -22,25 +23,25 @@ export default class Step4 extends React.Component {
   }
 
   next = () => {
-    if (
-      this.state.name &&
-      this.state.gender &&
-      this.state.city &&
-      this.state.bankAccountNumber &&
-      this.state.bankName != ""
-    ) {
-      // Save step state for use in other steps of the wizard
-      this.props.saveState(0, { key: "value" });
+    const { gender, city, bankName, bankAccountNumber } = this.state;
+    const data = this.props.getState()[1];
+    console.log(data);
 
-      // Go to next step
+    try {
+      if (!gender && !city && !bankAccountNumber && !bankName) {
+        throw { message: "Please fill all fields!" };
+      }
+      data.gender = gender;
+      data.city = city;
+      data.bank = {
+        name: bankName,
+        accountNumber: bankAccountNumber
+      };
+      this.props.saveState(1, data);
+
       this.props.nextFn();
-    } else {
-      return Toast.show({
-        text: "One of the field is missing",
-        type: "warning",
-        duration: 3000,
-        buttonText: "Okay"
-      });
+    } catch (error) {
+      handlers.showToast(error.message, "danger");
     }
   };
 
@@ -57,15 +58,6 @@ export default class Step4 extends React.Component {
 
         <View style={styles.middleContainer}>
           <View style={styles.fieldContainer}>
-            <Item stackedLabel style={styles.inputs}>
-              <Label style={styles.labelStyle}>Full Name</Label>
-              <Input
-                style={styles.inputStyle}
-                keyboardType="phone-pad"
-                onChangeText={name => this.setState({ name })}
-              />
-            </Item>
-
             <Label style={styles.labelStyleDropdown}>Gender</Label>
             <Dropdown
               data={data_gender}
