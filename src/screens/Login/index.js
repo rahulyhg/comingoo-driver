@@ -75,7 +75,7 @@ class Login extends React.Component {
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topContainer}>
-            <Text style={styles.headingTxt}>{strings('login.login')} 2</Text>
+            <Text style={styles.headingTxt}>{strings('login.login')}</Text>
           </View>
           <View style={styles.middleContainer}>
             <View style={styles.fieldContainer}>

@@ -1,6 +1,4 @@
-import { LOGIN_REQUEST, SIGNUP_REQUEST, RESET,  LOGIN, LOGOUT, UPDATE_USER } from "./types";
-
-
+import { LOGIN, SIGNUP_REQUEST, RESET, LOGOUT, UPDATE_USER } from "./types";
 
 export const onSignup = payload => ({
   type: SIGNUP_REQUEST,
