@@ -7,7 +7,7 @@ import ForgetPassword from "../screens/ForgerPassword";
 
 // For app drawer
 //import SideMenu from '../components/SideMenu/index'
-import SideMenu from '../components/NewSideMenu/index'
+import SideMenu from '../components/SideMenu/index'
 import Dashboard from "../screens/Dashboard";
 import History from "../screens/History";
 import Aide from "../screens/Aide";

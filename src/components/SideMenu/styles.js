@@ -3,13 +3,16 @@ import { Dimensions, StyleSheet, Platform } from "react-native";
 const { width, height } = Dimensions.get("window");
 
 export default StyleSheet.create({
+    mainContainer:{
+     flex : 1,
+    },
     container: {
         flex: 1,
-        resizeMode: 'stretch',
-
         ...Platform.select({
           android: {
-            width: width/1.11,
+            width: width / 1.117, 
+            height: "100%",
+            resizeMode: 'cover',
           },
         }),
         
@@ -29,17 +32,24 @@ export default StyleSheet.create({
       },
       secondContainer: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent : 'center',
-        top: 30
+      },
+      logoutContainer : {
+        flex : 0.10,
+        ...Platform.select({
+          android: {
+            width : width/1.285,
+          },
+        }),
+        borderTopWidth: 0.7,
+        borderTopColor: 'white',
+        
       },
       logout : {
-        flex : 0.10,
+        
         
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderTopWidth: 0.7,
-        borderTopColor: 'white',
+        
       }
 });

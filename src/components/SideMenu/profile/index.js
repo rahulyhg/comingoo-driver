@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, ImageBackground, Image } from 'react-native';
-import { Dimensions, StyleSheet } from "react-native";
+import { Platform, View, TouchableOpacity, Text, ImageBackground, Image } from 'react-native';
+import { Dimensions } from "react-native";
 
 
 const { width, height } = Dimensions.get("window");
@@ -9,18 +9,52 @@ import {icons} from '../../../utils/';
 
 
 const ProfileComponent = ({ profileUrl, username, email }) =>
-  <View style={{flexDirection:'row', justifyContent: 'center', alignItems: 'center',  top: 40}}>
+  <View style={{flexDirection:'row', marginTop: Platform.OS === 'ios' ? width/10 : height/270}}>
 
 		<Image source={{uri: profileUrl}} 
-		resizeMode="contain" 
-		style={{margin:15, width:70, height:70, borderWidth:5, borderColor:'white', borderRadius:35}} />
+				
+				style={{
+					margin:15, 
+					height: Platform.OS === 'ios' ? height/10.8 : height/10, 
+					width: Platform.OS === 'ios' ? width/5 : width/6, 
+					borderColor:'white', 
+					borderWidth: Platform.OS === 'ios' ? 2 : 2, 
+					borderRadius: Platform.OS === 'ios' ? 35 : 1000, 
+					...Platform.select({
+						android: {
+						 left : width/11.5
+						},
+					  }),
+					}} />
 
-  	<View style ={{marginTop : height/35,}}>
-    	<Text style={{fontWeight:'500', fontSize:25, color:'#fff'}}>{username}</Text>
+		
+
+  		<View style ={{
+			 
+			  ...Platform.select({
+				  ios: {
+					marginTop : height/29,
+				  },
+				android: {
+				 left : width/11.5,
+				 marginTop : height/26,
+				},
+			  }),
+			 }}>
+
+    		<Text style={{
+				fontWeight: Platform.OS === 'ios' ? '500' : '200',   
+				fontSize: Platform.OS === 'ios' ? width*0.06 : width*0.05,   
+				color:'#fff'
+				}}>{username}</Text>
 		
 			<ImageBackground 
 			source={icons.rating}
-			style={{flex:1, height: height/45, width: width/6}}
+			style={{
+				flex:1, 
+				height: Platform.OS === 'ios' ? height/45 : height/30,   
+				width: width/6
+			}}
 			>
 			<Text style={{position: 'absolute', paddingLeft: 30}}>5.0</Text>
 			</ImageBackground>

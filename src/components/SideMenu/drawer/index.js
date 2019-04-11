@@ -5,32 +5,44 @@ import {
   Text,
   ListView,
   Image,
-  StyleSheet
-} from 'react-native'
+  StyleSheet,
+  Dimensions,
+  Platform
+} from 'react-native';
+const { width, height } = Dimensions.get("window");
 
 const DrawerItem = ({ icon, navigation, name, screenName }) =>
-  <TouchableOpacity
+<View style={{
+  left : Platform.OS === 'ios' ? width/12.7 : width/7.5,
+}}>
+<TouchableOpacity
     style={styles.menuItem}
     onPress={() =>
       navigation.navigate(`${screenName}`, { isStatusBarHidden: false })}
   >
-    <Image source={icon} style={{height : 35, width : 35}} />
+    <Image source={icon} 
+    style={{
+      height : Platform.OS === 'ios' ? 35 : 30,
+      width : Platform.OS === 'ios' ? 35 : 30,
+      }} />
     <Text style={styles.menuItemText}>{name}</Text>
   </TouchableOpacity>
+</View>
+  
 
 
 const styles = StyleSheet.create({
   menuItem: {
     flexDirection:'row',
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 10,
+    margin: Platform.OS === 'ios' ? 15 : 10, 
     
   },
   menuItemText: {
-    fontSize:17,
-    fontWeight:'500',
-    margin:15,
-    
+    fontSize: Platform.OS === 'ios' ? width/19 : width/20, 
+    fontWeight: Platform.OS === 'ios' ? '500' : '200',
+    margin:10,
     color : 'white'
   }
 })
