@@ -4,7 +4,8 @@ import { firebaseConfig } from "../../../env";
 import { ERROR,
         LOGIN, LOGIN_SUCCESS,
         SIGNUP_REQUEST, SIGNUP_SUCCESS,
-        IMAGE_UPLOAD_REQUEST, IMAGE_UPLOAD_SUCCESS, } from "./types";
+        IMAGE_UPLOAD_REQUEST, IMAGE_UPLOAD_SUCCESS ,
+        RESETPASSWORD , RESETPASSWORD_SUCCESS} from "./types";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -114,8 +115,31 @@ function* loginRequest({ payload }) {
         }
 }
 
+function* handleResetPasswordRequest({ payload }) =>{
+
+    const headerOption = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(payload)
+      };
+      try {
+          const data = yield fetch(`${base_url}/passwordReset`, headerOption);
+          const response = yield data.json();
+          if(data.status == 202){
+             yield put({ type: RESETPASSWORD_SUCCESS, payload: response });
+          } else {
+            throw response;
+          }
+      } catch (e){
+            yield put({ type: ERROR, payload: e.message });
+      }
+}
+
 export function* watchAuth() {
   yield takeLatest(LOGIN, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, handleSignupRequest);
   yield takeLatest(IMAGE_UPLOAD_REQUEST, handleImageUpload);
+  yield takeLatest(RESETPASSWORD, handleResetPasswordRequest);
 }

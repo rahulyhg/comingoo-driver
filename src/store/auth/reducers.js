@@ -2,14 +2,16 @@ import { RESET,   LOGOUT,
         SIGNUP_REQUEST, SIGNUP_SUCCESS,
         LOGIN, LOGIN_SUCCESS,
         ERROR, UPDATE_USER ,
-        IMAGE_UPLOAD_REQUEST,IMAGE_UPLOAD_SUCCESS} from "./types";
+        IMAGE_UPLOAD_REQUEST, IMAGE_UPLOAD_SUCCESS,
+        RESETPASSWORD, RESETPASSWORD_SUCCESS} from "./types";
 
 const initialState = {
   user: null,
   error: "",
   loader: false,
   successMessage: "",
-  url: {}
+  url: {},
+  resetMessage: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,12 +54,20 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: { ...state.user, ...action.payload }
       };
+    case RESETPASSWORD:
+      return { ...state, resetMessage: ""};
+    case RESETPASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetMessage:  action.payload
+      };  
     case ERROR:
       return {
         ...state,
         error: action.payload,
         loader: false
       };
+
     case RESET:
       return {
         ...state,

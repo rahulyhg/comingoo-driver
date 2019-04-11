@@ -10,8 +10,9 @@ import { confirmCode, signIn } from '../../config/firebase'
 import styles from "./styles";
 import { colors } from "../../constants";
 import { icons } from "../../utils";
+import { onReset } from "../../store/auth/actions";
 
-class Signup extends React.Component {
+class ForgetPassword extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,6 +43,21 @@ class Signup extends React.Component {
     this.setState({ step: step + 1 });
   };
 
+  componentWillReceiveProps = nextProps => {	  componentDidMount() {
+       const { message } = nextProps;	    // signOut();
+       this.setState({ step: step + 1 });
+       return handlers.showToast(message, "success");
+  }
+
+  resetPassword =  async() => {
+    const { handleResetRequest } = this.props;
+    const payload={
+      phoneNumber: this.state.number,
+      password: this.state.password
+    }
+    await handleResetRequest(payload)
+  }
+
   sendOTP = async () => {
     const { number } = this.state;
 
@@ -64,7 +80,6 @@ class Signup extends React.Component {
         this.next()
       }
     } catch (error) {
-      console.log("TCL: Signup -> sendOTP -> error", error);
       handlers.showToast(error.message, "danger");
     }
   };
@@ -167,7 +182,7 @@ class Signup extends React.Component {
         </View>
         <TouchableOpacity
           style={[styles.nextBtn, { alignSelf: "center" }]}
-          onPress={this.next}
+          onPress={this.resetPassword}
         >
           <Image style={styles.btnImage} source={icons.right_arrow} />
         </TouchableOpacity>
@@ -222,7 +237,7 @@ class Signup extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
-          <Text style={styles.headingTxt}> 
+          <Text style={styles.headingTxt}>
             {step == 1
               ? "réinitialisez votre mot de passe"
               : step == 2
@@ -235,18 +250,22 @@ class Signup extends React.Component {
             ? this.numberInput()
             : step == 2
               ? this.otpInput()
-              : this.newPassword()}
+              :  this.newPassword()}
         </View>
       </View>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+   message: state.authReducer.resetMessage
+});
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  handleResetRequest: payload =>  dispatch(onReset(payload))
+});
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Signup);
+)(ForgetPassword);
