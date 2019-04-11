@@ -15,10 +15,6 @@ export default StyleSheet.create({
             resizeMode: 'cover',
           },
         }),
-        
-        // position : 'absolute',
-        //width: width,
-        // height : height,
       },
       menuItem: {
         flexDirection:'row',
@@ -45,8 +41,6 @@ export default StyleSheet.create({
         
       },
       logout : {
-        
-        
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',

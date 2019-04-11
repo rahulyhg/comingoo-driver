@@ -13,14 +13,7 @@ import {
 import ProfileComponent from '../SideMenu/profile';
 import DrawerItem from '../SideMenu/drawer';
 import styles from './styles';
-import { images } from '../../utils/index';
-
-import home_ic from '../../assets/icons/home.png';
-import history_ic from '../../assets/icons/history.png';
-import aide_ic from '../../assets/icons/aide.png';
-import heart_ic from '../../assets/icons/heart.png';
-import inbox_ic from '../../assets/icons/inbox.png';
-import logout_ic from '../../assets/icons/signout.png';
+import { icons, images } from '../../utils/index';
 
 const { width, height } = Dimensions.get("window");
 
@@ -32,11 +25,11 @@ const userData = {
 
 
 const menuData = [
-  {icon: home_ic, name:"Accueli", screenName:"Dashboard", key: 1},
-  {icon: history_ic, name:"Historique", screenName:"History", key: 2},
-  {icon: inbox_ic, name:"Inbox", screenName:"Inbox", key: 3},
-  {icon: heart_ic, name:"Comingoo & You", screenName:"ComingooYou", key: 4},
-  {icon: aide_ic, name:"Aide", screenName:"Aide", key: 5},
+  {icon: icons.home_icon, name:"Accueli", screenName:"Dashboard", key: 1},
+  {icon: icons.history, name:"Historique", screenName:"History", key: 2},
+  {icon: icons.inbox_icon, name:"Inbox", screenName:"Inbox", key: 3},
+  {icon: icons.heart_icon, name:"Comingoo & You", screenName:"ComingooYou", key: 4},
+  {icon: icons.aide_icon, name:"Aide", screenName:"Aide", key: 5},
   ]
 
 
@@ -79,7 +72,7 @@ class SideMenu extends Component {
                   style={styles.logout}
                   onPress={() => this.props.navigation.navigate('Home')}
                   >
-                  <Image source={logout_ic} style={{width: 35, height : 35}}/>
+                  <Image source={icons.logOut_icon} style={{width: 35, height : 35}}/>
                     <Text style={styles.menuItemText}>
                       Se déconnecter
                     </Text>

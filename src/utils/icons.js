@@ -10,4 +10,5 @@ export default {
   home_icon: require("../assets/icons/home.png"),
   menubutton: require("../assets/icons/menubtn.png"),
   rating: require("../assets/icons/rating.png"),
+  logOut_icon: require("../assets/icons/signout.png"),
 };
