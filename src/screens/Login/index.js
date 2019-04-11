@@ -52,6 +52,7 @@ class Login extends React.Component {
     else {
       const { reset, handleLogin } = this.props;
       await reset();
+
       const payload={
         phoneNumber: number,
         password: password
@@ -140,7 +141,7 @@ const mapStateToProps = state => (
 );
 
 const mapDispatchToProps = dispatch => ({
-  handleLogin: payload =>  dispatch(onLogin(payload))
+  handleLogin: payload =>  dispatch(onLogin(payload)),
   reset: () => dispatch(resetErrorAndLoading())
 });
 
