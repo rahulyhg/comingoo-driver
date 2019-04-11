@@ -1,15 +1,8 @@
-import {
-  LOGOUT,
-  ERROR,
-  UPDATE_USER,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  RESET,
-  IMAGE_UPLOAD_REQUEST,
-  IMAGE_UPLOAD_SUCCESS
-} from "./types";
+import { RESET,   LOGOUT,
+        SIGNUP_REQUEST, SIGNUP_SUCCESS,
+        LOGIN, LOGIN_SUCCESS,
+        ERROR, UPDATE_USER ,
+        IMAGE_UPLOAD_REQUEST,IMAGE_UPLOAD_SUCCESS} from "./types";
 
 const initialState = {
   user: null,
@@ -21,7 +14,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case LOGIN:
       return {
         ...state,
         loader: true

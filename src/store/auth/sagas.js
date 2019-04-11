@@ -1,24 +1,16 @@
 import { put, takeEvery, takeLatest, select } from "redux-saga/effects";
 import firebase from "firebase";
-
-import {
-  ERROR,
-  LOGIN_REQUEST,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  IMAGE_UPLOAD_REQUEST,
-  IMAGE_UPLOAD_SUCCESS,
-  RESET
-} from "./types";
 import { firebaseConfig } from "../../../env";
+import { ERROR,
+        LOGIN, LOGIN_SUCCESS,
+        SIGNUP_REQUEST, SIGNUP_SUCCESS,
+        IMAGE_UPLOAD_REQUEST, IMAGE_UPLOAD_SUCCESS, } from "./types";
 
 firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.storage();
 
 const base_url = "https://comingoo.herokuapp.com/drivers";
-
-function* handleLoginRequest() {}
 
 function* handleSignupRequest({ payload }) {
   console.log("TCL: function*handleSignupRequest -> payload", payload);
@@ -45,7 +37,6 @@ function* handleSignupRequest({ payload }) {
     yield put({ type: ERROR, payload: error });
   }
 }
-
 function* handleImageUpload({ payload }) {
   console.log("images", payload);
   const storageRef = yield storage.ref();
@@ -100,8 +91,31 @@ function* handleImageUpload({ payload }) {
   }
 }
 
+function* loginRequest({ payload }) {
+
+    const headerOption = {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+        };
+
+        try {
+            const data = yield fetch(`${base_url}/loginDriver`, headerOption);
+            const response = yield data.json();
+            if(data.status == 202){
+               yield put({ type: LOGIN_SUCCESS, payload: response });
+            } else {
+              throw response;
+            }
+        } catch (e){
+              yield put({ type: ERROR, payload: e.message });
+        }
+}
+
 export function* watchAuth() {
-  yield takeLatest(LOGIN_REQUEST, handleLoginRequest);
+  yield takeLatest(LOGIN, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, handleSignupRequest);
   yield takeLatest(IMAGE_UPLOAD_REQUEST, handleImageUpload);
 }
