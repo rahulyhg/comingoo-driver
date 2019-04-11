@@ -60,7 +60,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         resetMessage:  action.payload
-      };  
+      };
     case ERROR:
       return {
         ...state,
@@ -74,6 +74,7 @@ const reducer = (state = initialState, action) => {
         error: "",
         loader: false,
         successMessage: "",
+        user: null,
         url: {}
       };
     default:

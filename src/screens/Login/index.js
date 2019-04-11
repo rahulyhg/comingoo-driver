@@ -3,7 +3,7 @@ import { Text, View, Image, ScrollView, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { Item, Label, Input } from "native-base";
 
-import { onLogin } from "../../store/auth/actions";
+import { onLogin, resetErrorAndLoading } from "../../store/auth/actions";
 
 import styles from "./styles";
 import { colors } from "../../constants";
@@ -20,7 +20,8 @@ class Login extends React.Component {
       number: "",
       password: "",
       passwordError: false,
-      numberError: false
+      numberError: false,
+      loader: false,
     };
   }
 
@@ -49,7 +50,8 @@ class Login extends React.Component {
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
     }
     else {
-      const { handleLogin } = this.props;
+      const { reset, handleLogin } = this.props;
+      await reset();
       const payload={
         phoneNumber: number,
         password: password
@@ -139,6 +141,7 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => ({
   handleLogin: payload =>  dispatch(onLogin(payload))
+  reset: () => dispatch(resetErrorAndLoading())
 });
 
 export default connect(
