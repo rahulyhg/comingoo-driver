@@ -34,10 +34,6 @@ class ForgetPassword extends React.Component {
     headerStyle: styles.headerStyle
   });
 
-  componentDidMount() {
-    // signOut();
-  }
-
   next = () => {
     const { step } = this.state;
     this.setState({ step: step + 1 });
