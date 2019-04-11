@@ -6,3 +6,6 @@ export const LOGOUT = "LOGOUT_SUCCESS";
 export const UPDATE_USER = "UPDATE_USER";
 export const ERROR = "ERROR";
 export const RESET = "RESET";
+
+export const RESETPASSWORD =  "RESETPASSWORD_LOAD";
+export const RESETPASSWORD_SUCCESS ="RESETPASSWORD_SUCCESS"
