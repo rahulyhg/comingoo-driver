@@ -1,19 +1,22 @@
 import { put, takeEvery, takeLatest, select } from "redux-saga/effects";
+import firebase from "firebase";
 
-import { ERROR, LOGIN_REQUEST, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./types";
+import {
+  ERROR,
+  LOGIN_REQUEST,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  IMAGE_UPLOAD_REQUEST,
+  IMAGE_UPLOAD_SUCCESS,
+  RESET
+} from "./types";
+import { firebaseConfig } from "../../../env";
+
+firebase.initializeApp(firebaseConfig);
+
+const storage = firebase.storage();
 
 const base_url = "https://comingoo.herokuapp.com/drivers";
-
-// function* getUser() {
-//   const getToken = state => state.token;
-//   const token = yield select(getToken);
-//   console.log(token);
-//   yield put({ type: UPDATE_USER, payload: {} });
-// }
-
-// export function* watchLogin() {
-//   yield takeEvery(LOGIN, getUser);
-// }
 
 function* handleLoginRequest() {}
 
@@ -43,7 +46,62 @@ function* handleSignupRequest({ payload }) {
   }
 }
 
+function* handleImageUpload({ payload }) {
+  console.log("images", payload);
+  const storageRef = yield storage.ref();
+  const promises = yield payload.map(image => {
+    return new Promise((resolve, reject) => {
+      const blob = new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function(e) {
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", image, true);
+        xhr.send(null);
+      });
+
+      blob.then(result => {
+        let imgRef = storageRef.child("/images/" + Math.random() + ".jpg");
+        imgRef
+          .put(result)
+          .then(function(snapshot) {
+            imgRef.getDownloadURL().then(function(url) {
+              resolve(url);
+            });
+          })
+          .catch(err => reject(err));
+      });
+    });
+  });
+
+  try {
+    const res = yield Promise.all(promises);
+    const payload = {
+      drivingLicenseImages: {
+        frontUrl: res[0],
+        backUrl: res[1]
+      },
+      vehicalRegistrationImages: {
+        frontUrl: res[2],
+        backUrl: res[3]
+      },
+      idCardImages: {
+        frontUrl: res[4],
+        backUrl: res[5]
+      }
+    };
+    yield put({ type: IMAGE_UPLOAD_SUCCESS, payload });
+  } catch (error) {
+    yield put({ type: ERROR, payload: error });
+  }
+}
+
 export function* watchAuth() {
   yield takeLatest(LOGIN_REQUEST, handleLoginRequest);
   yield takeLatest(SIGNUP_REQUEST, handleSignupRequest);
+  yield takeLatest(IMAGE_UPLOAD_REQUEST, handleImageUpload);
 }

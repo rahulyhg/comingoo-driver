@@ -6,3 +6,6 @@ export const LOGOUT = "LOGOUT_SUCCESS";
 export const UPDATE_USER = "UPDATE_USER";
 export const ERROR = "ERROR";
 export const RESET = "RESET";
+export const IMAGE_UPLOAD_REQUEST = "IMAGE_UPLOAD_REQUEST";
+export const IMAGE_UPLOAD_SUCCESS = "IMAGE_UPLOAD_SUCCESS";
+

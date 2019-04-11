@@ -19,7 +19,9 @@ export default class Step6 extends React.Component {
       multiple: true,
       waitAnimationEnd: false,
       includeExif: true,
-      forceJpg: true
+      forceJpg: true,
+      mediaType: "photo",
+      includeBase64: true
     })
       .then(images => {
         this.setState({
@@ -29,7 +31,8 @@ export default class Step6 extends React.Component {
               uri: i.path,
               width: i.width,
               height: i.height,
-              mime: i.mime
+              mime: i.mime,
+              base64: i.data
             };
           })
         });
@@ -39,14 +42,14 @@ export default class Step6 extends React.Component {
 
   next = () => {
     const { images } = this.state;
-    const data = this.props.getState()[1];
+    const data = this.props.getState()[1] || {};
 
     if (images.length >= 2) {
       data.idCardImages = {
-        frontUrl: ".com",
-        backUrl: ".com"
+        frontUrl: images[0].uri,
+        backUrl: images[1].uri
       };
-      this.props.saveState(0, data);
+      this.props.saveState(1, data);
 
       this.props.nextFn();
     } else {

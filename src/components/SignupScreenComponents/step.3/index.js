@@ -20,7 +20,7 @@ export default class Step3 extends React.Component {
 
   next = () => {
     const { name, email, password, confirmpassword } = this.state;
-    const data = this.props.getState()[1];
+    const data = this.props.getState()[1] || { phoneNumber: "+923000000080" };
 
     try {
       if (!name && !email && !password && !confirmpassword) {

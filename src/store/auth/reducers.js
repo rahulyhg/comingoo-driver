@@ -6,14 +6,17 @@ import {
   LOGIN_SUCCESS,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
-  RESET
+  RESET,
+  IMAGE_UPLOAD_REQUEST,
+  IMAGE_UPLOAD_SUCCESS
 } from "./types";
 
 const initialState = {
   user: null,
   error: "",
   loader: false,
-  successMessage: ""
+  successMessage: "",
+  url: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -40,6 +43,17 @@ const reducer = (state = initialState, action) => {
         successMessage: action.payload,
         loader: false
       };
+    case IMAGE_UPLOAD_REQUEST:
+      return {
+        ...state,
+        loader: true
+      };
+    case IMAGE_UPLOAD_SUCCESS:
+      return {
+        ...state,
+        loader: false,
+        url: action.payload
+      };
     case UPDATE_USER:
       return {
         ...state,
@@ -56,7 +70,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         error: "",
         loader: false,
-        successMessage: ""
+        successMessage: "",
+        url: {}
       };
     default:
       return state;

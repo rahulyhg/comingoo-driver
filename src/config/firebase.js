@@ -1,4 +1,10 @@
 import firebase from "react-native-firebase";
+// import WebFirebase from "firebase";
+
+// import { firebaseConfig } from "../../env";
+// import { handlers } from "../helpers";
+
+// WebFirebase.initializeApp(firebaseConfig);
 
 export const signIn = async phoneNumber => {
   try {
@@ -11,7 +17,7 @@ export const signIn = async phoneNumber => {
   }
 };
 
-export const confirmCode = async payload => { 
+export const confirmCode = async payload => {
   const { otp, confirmResult } = payload;
   console.log("TCL: confirmResult", confirmResult);
   console.log("TCL: otp", otp);
@@ -65,3 +71,30 @@ export const signOut = () => {
   // firebase.auth().signOut();
   // firebase.auth().currentUser.unlink(firebase.auth.PhoneAuthProvider.PROVIDER_ID);
 };
+
+// export const uploadImages = async images => {
+//   console.log("images", images);
+//   let storageRef = WebFirebase.storage().ref();
+//   let promises = images.map(image => {
+//     return new Promise((resolve, reject) => {
+//       handlers.blobMaker(image).then(result => {
+//         let imgRef = storageRef.child("/images/" + Math.random() + ".jpg");
+//         imgRef
+//           .put(result)
+//           .then(function(snapshot) {
+//             imgRef.getDownloadURL().then(function(url) {
+//               resolve(url);
+//             });
+//           })
+//           .catch(err => reject(err));
+//       });
+//     });
+//   });
+//   try {
+//     const res = await Promise.all(promises);
+//     return res;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+

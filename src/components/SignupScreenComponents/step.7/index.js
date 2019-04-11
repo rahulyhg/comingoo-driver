@@ -42,10 +42,10 @@ export default class Step7 extends React.Component {
     const data = this.props.getState()[1];
     if (images.length >= 2) {
       data.vehicalRegistrationImages = {
-        frontUrl: ".com",
-        backUrl: ".com"
+        frontUrl: images[0].uri,
+        backUrl: images[1].uri
       };
-      this.props.saveState(0, data);
+      this.props.saveState(1, data);
 
       this.props.nextFn();
     } else {
