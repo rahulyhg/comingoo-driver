@@ -38,11 +38,15 @@ export default class Step7 extends React.Component {
   };
 
   next = () => {
-    if (this.state.images != null) {
-      // Save step state for use in other steps of the wizard
-      this.props.saveState(0, { key: "value" });
+    const { images } = this.state;
+    const data = this.props.getState()[1];
+    if (images.length >= 2) {
+      data.vehicalRegistrationImages = {
+        frontUrl: ".com",
+        backUrl: ".com"
+      };
+      this.props.saveState(0, data);
 
-      // Go to next step
       this.props.nextFn();
     } else {
       return Toast.show({

@@ -7,17 +7,19 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
-import styles from "./styles";
-import { Toast } from "native-base";
-import { icons } from "../../../utils/";
 import ImagePicker from "react-native-image-crop-picker";
+
+import styles from "./styles";
+import { icons } from "../../../utils/";
+import { handlers } from "../../../helpers";
 
 export default class Step8 extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      images: []
+      images: [],
+      disabled: false
     };
   }
 
@@ -45,22 +47,24 @@ export default class Step8 extends React.Component {
   };
 
   next = () => {
-    if (this.state.images != null) {
-      // Save step state for use in other steps of the wizard
-      this.props.saveState(0, { key: "value" });
+    const { images } = this.state;
+    const data = this.props.getState()[1];
+    if (images.length >= 2) {
+      data.drivingLicenseImages = {
+        frontUrl: ".com",
+        backUrl: ".com"
+      };
 
-      // Go to next step
+      this.setState({ disabled: true });
+      console.log("final payload>>", data);
+
+      this.props.saveState(1, data);
       this.props.nextFn();
-
-      //Success Alert
-      Alert.alert("Successfully Registered");
     } else {
-      return Toast.show({
-        text: "You forgot to upload your Drivers License image",
-        type: "warning",
-        duration: 3000,
-        buttonText: "Okay"
-      });
+      handlers.showToast(
+        "You forgot to upload your Drivers License image",
+        "danger"
+      );
     }
   };
 
@@ -83,7 +87,7 @@ export default class Step8 extends React.Component {
   }
 
   render() {
-    const { images } = this.state;
+    const { images, disabled } = this.state;
 
     return (
       <View style={styles.container}>
@@ -112,12 +116,14 @@ export default class Step8 extends React.Component {
             <TouchableOpacity
               style={styles.backBtn}
               onPress={() => this.back()}
+              disabled={disabled}
             >
               <Image style={styles.btnImageLeft} source={icons.right_arrow} />
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.nextBtn}
               onPress={() => this.next()}
+              disabled={disabled}
             >
               <Image style={styles.btnImage} source={icons.right_arrow} />
             </TouchableOpacity>

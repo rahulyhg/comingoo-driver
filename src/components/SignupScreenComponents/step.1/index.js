@@ -16,9 +16,6 @@ export default class Step1 extends React.Component {
       confirmResult: null
     };
   }
-  componentDidMount() {
-    this.props.saveState("1", "asnoiadiaod");
-  }
 
   sendOTP = async () => {
     const { number } = this.state;
@@ -36,6 +33,7 @@ export default class Step1 extends React.Component {
     try {
       const confirmResult = await signIn(number);
       this.props.saveState("0", confirmResult);
+      this.props.saveState("1", { phoneNumber: number });
       this.props.nextFn();
     } catch (error) {
       console.log("TCL: Signup -> sendOTP -> error", error);

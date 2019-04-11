@@ -1,14 +1,15 @@
-import { LOGIN, LOGOUT, UPDATE_USER } from "./types";
+import { LOGIN_REQUEST, SIGNUP_REQUEST, RESET } from "./types";
 
-export const onLogin = () => ({
-  type: LOGIN
-});
-
-export const onLogout = () => ({
-  type: LOGOUT
-});
-
-export const updataUser = payload => ({
-  type: UPDATE_USER,
+export const onLogin = payload => ({
+  type: LOGIN_REQUEST,
   payload
+});
+
+export const onSignup = payload => ({
+  type: SIGNUP_REQUEST,
+  payload
+});
+
+export const resetErrorAndLoading = () => ({
+  type: RESET
 });
