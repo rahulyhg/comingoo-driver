@@ -29,7 +29,17 @@ class Login extends React.Component {
     headerStyle: styles.headerStyle
   });
 
-  login = () => {
+   componentWillReceiveProps = nextProps => {
+      const { error, user } = nextProps;
+      if(user){
+        this.props.navigation.navigate('Map');
+        return handlers.showToast("Login Successfully!", "success");
+      } else {
+        return handlers.showToast(error, "danger");
+      }
+   }
+
+  login = async() => {
     const { number, password } = this.state;
     if (!number || !password) {
       this.setState({
@@ -39,10 +49,12 @@ class Login extends React.Component {
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
     }
     else {
-      this.props.navigation.navigate('Map');
-      // this.navigate("Dashboard");
-
-      return handlers.showToast(strings("login.missing_input"), "danger");
+      const { handleLogin } = this.props;
+      const payload={
+        phoneNumber: number,
+        password: password
+      }
+      await handleLogin(payload)
     }
   };
 
@@ -63,7 +75,7 @@ class Login extends React.Component {
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topContainer}>
-            <Text style={styles.headingTxt}>{strings('login.login')}</Text>
+            <Text style={styles.headingTxt}>{strings('login.login')} 2</Text>
           </View>
           <View style={styles.middleContainer}>
             <View style={styles.fieldContainer}>
@@ -117,10 +129,16 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => (
+    {
+      loader: state.authReducer.loader,
+      user: state.authReducer.user,
+      error: state.authReducer.error,
+    }
+);
 
 const mapDispatchToProps = dispatch => ({
-  onLogin: () => dispatch(onLogin())
+  handleLogin: payload =>  dispatch(onLogin(payload))
 });
 
 export default connect(
