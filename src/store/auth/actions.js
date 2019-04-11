@@ -1,4 +1,4 @@
-import { LOGIN, SIGNUP_REQUEST, RESET, LOGOUT, UPDATE_USER, RESETPASSWORD } from "./types";
+import { LOGIN, SIGNUP_REQUEST, RESET, LOGOUT, UPDATE_USER } from "./types";
 
 export const onSignup = payload => ({
   type: SIGNUP_REQUEST,
@@ -20,10 +20,5 @@ export const onLogout = () => ({
 
 export const updataUser = payload => ({
   type: UPDATE_USER,
-  payload
-});
-
-export const onReset = payload  => ({
-  type: RESETPASSWORD,
   payload
 });
