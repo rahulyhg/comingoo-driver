@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
-import { Item, Label, Input } from "native-base";
+import { View, Text} from "react-native";
 import { connect } from "react-redux";
-
 import styles from "./styles";
 import { colors } from "../../constants";
-import { icons } from "../../utils";
-
-import { handlers } from "../../helpers";
 import MenuBtn from '../../components/SideMenu/menu_button';
 
 export class Dashboard extends Component {
