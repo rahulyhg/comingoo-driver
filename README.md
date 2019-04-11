@@ -69,7 +69,15 @@ react-native run-ios
 cd ..
 react-native run-android 
 ```
+7: set up a configuration file of eslint
+```
+ ./node_modules/.bin/eslint --init
+```
+8: You can run ESLint on any file or directory like this:
 
+```
+ ./node_modules/.bin/eslint yourfiletest.js
+```
 ### Development Standarts
 
 1. Create a new branch for the task with the format <sprint_name>/c-<card_id> (e.g. sprint1/5-create-basic-structure) from development P.S. You can find card_id at the last path of trello url. e.g. https://trello.com/c/<board_id>/<card_id>
