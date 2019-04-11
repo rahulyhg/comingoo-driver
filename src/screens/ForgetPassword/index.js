@@ -39,7 +39,7 @@ class ForgetPassword extends React.Component {
     this.setState({ step: step + 1 });
   };
 
-  componentWillReceiveProps = nextProps => {	  componentDidMount() {
+  componentWillReceiveProps = nextProps => {	
        const { message } = nextProps;	    // signOut();
        this.setState({ step: step + 1 });
        return handlers.showToast(message, "success");
