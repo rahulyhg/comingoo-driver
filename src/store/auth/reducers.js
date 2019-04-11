@@ -2,23 +2,25 @@ import {
   LOGOUT,
   ERROR,
   UPDATE_USER,
-  LOGIN_REQUEST,
+  LOGIN,
   LOGIN_SUCCESS,
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
   RESET
 } from "./types";
 
+
 const initialState = {
   user: null,
   error: "",
   loader: false,
-  successMessage: ""
+  successMessage: "",
+  loading: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case LOGIN:
       return {
         ...state,
         loader: true
@@ -58,6 +60,7 @@ const reducer = (state = initialState, action) => {
         loader: false,
         successMessage: ""
       };
+
     default:
       return state;
   }

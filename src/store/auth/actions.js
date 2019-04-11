@@ -1,7 +1,7 @@
 import { LOGIN_REQUEST, SIGNUP_REQUEST, RESET } from "./types";
 
 export const onLogin = payload => ({
-  type: LOGIN_REQUEST,
+  type: LOGIN,
   payload
 });
 
