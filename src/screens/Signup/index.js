@@ -23,8 +23,8 @@ import {
 import { handlers } from "../../helpers/index.js";
 
 const steps = [
-  // { name: "StepOne", component: <StepOne /> },
-  // { name: "StepTwo", component: <StepTwo /> },
+  { name: "StepOne", component: <StepOne /> },
+  { name: "StepTwo", component: <StepTwo /> },
   { name: "StepThree", component: <StepThree /> },
   { name: "StepFour", component: <StepFour /> },
   { name: "StepFive", component: <StepFive /> },

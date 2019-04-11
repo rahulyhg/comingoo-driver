@@ -48,7 +48,7 @@ export default class Step8 extends React.Component {
 
   next = () => {
     const { images } = this.state;
-    const data = this.props.getState()[1] || {};
+    const data = this.props.getState()[1];
     if (images.length >= 2) {
       data.drivingLicenseImages = {
         frontUrl: images[0].uri,
