@@ -1,10 +1,12 @@
-import { RESET, LOGOUT,  SIGNUP_REQUEST, SIGNUP_SUCCESS, LOGIN, LOGIN_SUCCESS, ERROR, UPDATE_USER } from "./types";
+import { RESET, LOGOUT,  SIGNUP_REQUEST, SIGNUP_SUCCESS, LOGIN, LOGIN_SUCCESS,
+      ERROR, UPDATE_USER, RESETPASSWORD, RESETPASSWORD_SUCCESS } from "./types";
 
 const initialState = {
   user: null,
   error: "",
   loader: false,
   successMessage: "",
+  resetMessage: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +38,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: { ...state.user, ...action.payload }
       };
+    case RESETPASSWORD:
+        return { ...state, resetMessage: ""};
+    case RESETPASSWORD_SUCCESS:
+        return {
+          ...state,
+            resetMessage:  action.payload };
     case ERROR:
       return {
         ...state,
