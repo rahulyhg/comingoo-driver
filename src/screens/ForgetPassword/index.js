@@ -39,10 +39,13 @@ class ForgetPassword extends React.Component {
     this.setState({ step: step + 1 });
   };
 
-  componentWillReceiveProps = nextProps => {	
+  componentWillReceiveProps = nextProps => {
        const { message } = nextProps;	    // signOut();
        this.setState({ step: step + 1 });
-       return handlers.showToast(message, "success");
+       if(message){
+         this.props.navigation.navigate('Map');
+          return handlers.showToast('Password reset successful', "success");
+        }
   }
 
   resetPassword =  async() => {
