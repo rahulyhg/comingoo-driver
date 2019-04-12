@@ -54,7 +54,7 @@ function* loginRequest({ payload }) {
 
 }
 
-function* handleResetPasswordRequest({ payload }) =>{
+function* handleResetPasswordRequest({ payload }) {
 
   const headerOption = {
               method: "POST",
