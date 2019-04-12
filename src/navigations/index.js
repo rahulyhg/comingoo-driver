@@ -52,7 +52,8 @@ const MainStack = createStackNavigator(
     },
     Login: { screen: Login },
     Signup: { screen: Signup },
-    ForgetPassword: { screen: ForgetPassword }
+    ForgetPassword: { screen: ForgetPassword },
+    Map:{ screen: DriverMap}
   },
   {
     initialRouteName: "Home"
