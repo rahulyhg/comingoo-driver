@@ -14,28 +14,38 @@ export default class Step4 extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
       gender: "",
       city: "",
-      bankAccountNumber: "",
-      bankName: ""
+      accountNumber: "",
+      name: ""
     };
   }
 
+  componentDidMount() {
+    const data = this.props.getState()[1] || {};
+    console.log("TCL: Step3 -> componentDidMount -> data", data);
+    this.setState({
+      city: data.city || "",
+      gender: data.gender || "",
+      accountNumber: (data.bank && data.bank.accountNumber) || "",
+      name: (data.bank && data.bank.name) || ""
+    });
+  }
+
   next = () => {
-    const { gender, city, bankName, bankAccountNumber } = this.state;
+    const { gender, city, name, accountNumber } = this.state;
     const data = this.props.getState()[1];
     console.log(data);
 
     try {
-      if (!gender && !city && !bankAccountNumber && !bankName) {
+      if (!gender && !city && !accountNumber && !name) {
         throw { message: "Please fill all fields!" };
       }
       data.gender = gender;
       data.city = city;
       data.bank = {
-        name: bankName,
-        accountNumber: bankAccountNumber
+        name: name,
+        accountNumber: accountNumber
       };
       this.props.saveState(1, data);
 
@@ -49,7 +59,16 @@ export default class Step4 extends React.Component {
     this.props.prevFn();
   };
 
+  updateProps = (key, value) => {
+    const data = this.props.getState()[1] || {};
+    data[key] = value;
+    this.props.saveState("1", data);
+    const state = typeof value == "object" ? value : { [key]: value };
+    this.setState(state);
+  };
+
   render() {
+    const { accountNumber, name, gender, city } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
@@ -61,7 +80,8 @@ export default class Step4 extends React.Component {
             <Label style={styles.labelStyleDropdown}>Gender</Label>
             <Dropdown
               data={data_gender}
-              onChangeText={gender => this.setState({ gender })}
+              onChangeText={gender => this.updateProps("gender", gender)}
+              value={gender}
               baseColor={"#fff"}
               textColor={"#fff"}
               selectedItemColor={"#99999c"}
@@ -70,9 +90,10 @@ export default class Step4 extends React.Component {
             <Label style={styles.labelStyleDropdown}>City</Label>
             <Dropdown
               data={data_city}
-              onChangeText={city => this.setState({ city })}
+              onChangeText={city => this.updateProps("city", city)}
               baseColor={"#fff"}
               textColor={"#fff"}
+              value={city}
               selectedItemColor={"#99999c"}
             />
 
@@ -80,9 +101,10 @@ export default class Step4 extends React.Component {
               <Label style={styles.labelStyle}>Bank Account Number</Label>
               <Input
                 style={styles.inputStyle}
+                value={accountNumber}
                 keyboardType="phone-pad"
-                onChangeText={bankAccountNumber =>
-                  this.setState({ bankAccountNumber })
+                onChangeText={accountNumber =>
+                  this.updateProps("bank", { accountNumber, name })
                 }
               />
             </Item>
@@ -90,8 +112,14 @@ export default class Step4 extends React.Component {
             <Label style={styles.labelStyleDropdown}>Bank Name</Label>
             <Dropdown
               data={data_bank_name}
-              onChangeText={bankName => this.setState({ bankName })}
+              onChangeText={name =>
+                this.updateProps("bank", {
+                  accountNumber,
+                  name
+                })
+              }
               baseColor={"#fff"}
+              value={name}
               textColor={"#fff"}
               selectedItemColor={"#99999c"}
             />

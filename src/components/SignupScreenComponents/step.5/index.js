@@ -16,33 +16,45 @@ export default class Step5 extends React.Component {
     super(props);
 
     this.state = {
-      car_brand: "",
-      car_model: "",
-      car_color: "",
-      releaseYear: "",
-      license: ""
+      brand: "",
+      model: "",
+      color: "",
+      yearOfRelease: "",
+      licensePlateNumber: ""
     };
+  }
+
+  componentDidMount() {
+    const data = this.props.getState()[1] || {};
+    console.log("TCL: Step3 -> componentDidMount -> data", data);
+    this.setState({
+      brand: (data.car && data.car.brand) || "",
+      model: (data.car && data.car.model) || "",
+      color: (data.car && data.car.color) || "",
+      yearOfRelease: (data.car && data.car.yearOfRelease) || "",
+      licensePlateNumber: (data.car && data.car.licensePlateNumber) || ""
+    });
   }
 
   next = () => {
     const {
-      car_brand,
-      car_model,
-      car_color,
-      releaseYear,
-      license
+      brand,
+      model,
+      color,
+      yearOfRelease,
+      licensePlateNumber
     } = this.state;
     const data = this.props.getState()[1];
     try {
-      if (!car_brand && !car_model && !car_color && !releaseYear && !license) {
+      if (!brand && !model && !color && !yearOfRelease && !licensePlateNumber) {
         throw { message: "Please fill all fields!" };
       }
       data.car = {
-        brand: car_brand,
-        model: car_model,
-        color: car_color,
-        yearOfRelease: releaseYear,
-        licensePlateNumber: license
+        brand,
+        model,
+        color,
+        yearOfRelease,
+        licensePlateNumber
       };
       this.props.saveState(1, data);
 
@@ -56,7 +68,22 @@ export default class Step5 extends React.Component {
     this.props.prevFn();
   };
 
+  updateProps = (key, value) => {
+    const data = this.props.getState()[1] || {};
+    data[key] = value;
+    this.props.saveState("1", data);
+    const state = typeof value == "object" ? value : { [key]: value };
+    this.setState(state);
+  };
+
   render() {
+    const {
+      model,
+      brand,
+      color,
+      yearOfRelease,
+      licensePlateNumber
+    } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
@@ -68,8 +95,17 @@ export default class Step5 extends React.Component {
             <Label style={styles.labelStyleDropdown}>Car Brand</Label>
             <Dropdown
               data={data_car_brand}
-              onChangeText={car_brand => this.setState({ car_brand })}
+              onChangeText={brand =>
+                this.updateProps("car", {
+                  brand,
+                  color,
+                  model,
+                  yearOfRelease,
+                  licensePlateNumber
+                })
+              }
               baseColor={"#fff"}
+              value={brand}
               textColor={"#fff"}
               selectedItemColor={"#99999c"}
             />
@@ -77,8 +113,17 @@ export default class Step5 extends React.Component {
             <Label style={styles.labelStyleDropdown}>Car Model</Label>
             <Dropdown
               data={data_car_model}
-              onChangeText={car_model => this.setState({ car_model })}
+              onChangeText={model =>
+                this.updateProps("car", {
+                  brand,
+                  color,
+                  model,
+                  yearOfRelease,
+                  licensePlateNumber
+                })
+              }
               baseColor={"#fff"}
+              value={model}
               textColor={"#fff"}
               selectedItemColor={"#99999c"}
             />
@@ -86,7 +131,16 @@ export default class Step5 extends React.Component {
             <Label style={styles.labelStyleDropdown}>Car Color</Label>
             <Dropdown
               data={data_car_color}
-              onChangeText={car_color => this.setState({ car_color })}
+              onChangeText={color =>
+                this.updateProps("car", {
+                  brand,
+                  color,
+                  model,
+                  yearOfRelease,
+                  licensePlateNumber
+                })
+              }
+              value={color}
               baseColor={"#fff"}
               textColor={"#fff"}
               selectedItemColor={"#99999c"}
@@ -95,7 +149,16 @@ export default class Step5 extends React.Component {
             <Label style={styles.labelStyleDropdown}>Year of release</Label>
             <Dropdown
               data={data_year}
-              onChangeText={releaseYear => this.setState({ releaseYear })}
+              onChangeText={yearOfRelease =>
+                this.updateProps("car", {
+                  brand,
+                  color,
+                  model,
+                  yearOfRelease,
+                  licensePlateNumber
+                })
+              }
+              value={yearOfRelease}
               baseColor={"#fff"}
               textColor={"#fff"}
               selectedItemColor={"#99999c"}
@@ -105,9 +168,18 @@ export default class Step5 extends React.Component {
               <Label style={styles.labelStyle}>License Plate Number</Label>
               <Input
                 style={styles.inputStyle}
+                value={licensePlateNumber}
                 keyboardType="phone-pad"
                 maxLength={6}
-                onChangeText={license => this.setState({ license })}
+                onChangeText={licensePlateNumber =>
+                  this.updateProps("car", {
+                    brand,
+                    color,
+                    model,
+                    yearOfRelease,
+                    licensePlateNumber
+                  })
+                }
               />
             </Item>
           </View>

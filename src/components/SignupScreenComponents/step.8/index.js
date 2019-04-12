@@ -23,6 +23,25 @@ export default class Step8 extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const data = this.props.getState()[1] || {};
+    console.log("TCL: Step3 -> componentDidMount -> data", data);
+    this.setState({
+      images: [
+        {
+          uri:
+            (data.drivingLicenseImages && data.drivingLicenseImages.frontUrl) ||
+            "a"
+        },
+        {
+          uri:
+            (data.drivingLicenseImages && data.drivingLicenseImages.backUrl) ||
+            "a"
+        }
+      ]
+    });
+  }
+
   handleChoosePhoto = () => {
     ImagePicker.openPicker({
       multiple: true,
@@ -42,6 +61,7 @@ export default class Step8 extends React.Component {
             };
           })
         });
+        this.updateProps("drivingLicenseImages", this.state.images);
       })
       .catch(e => alert(e));
   };
@@ -72,19 +92,14 @@ export default class Step8 extends React.Component {
     this.props.prevFn();
   };
 
-  renderAsset(image) {
-    if (image.mime && image.mime.toLowerCase().indexOf("video/") !== -1) {
-      return this.renderVideo(image);
-    }
-
-    return this.renderImage(image);
-  }
-
-  renderImage(image) {
-    return (
-      <Image style={{ width: 180, height: 180, margin: 1 }} source={image} />
-    );
-  }
+  updateProps = (key, value) => {
+    const data = this.props.getState()[1] || {};
+    data[key] = {
+      frontUrl: value[0].uri,
+      backUrl: value[1].uri
+    };
+    this.props.saveState("1", data);
+  };
 
   render() {
     const { images, disabled } = this.state;

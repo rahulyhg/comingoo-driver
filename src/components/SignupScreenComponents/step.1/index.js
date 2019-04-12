@@ -12,17 +12,24 @@ export default class Step1 extends React.Component {
     super(props);
 
     this.state = {
-      number: "",
+      phoneNumber: "",
       confirmResult: null
     };
   }
 
-  sendOTP = async () => {
-    const { number } = this.state;
+  componentDidMount() {
+    const data = this.props.getState()[1] || {};
+    this.setState({
+      phoneNumber: data.phoneNumber || ""
+    });
+  }
 
-    if (!number) {
+  sendOTP = async () => {
+    const { phoneNumber } = this.state;
+
+    if (!phoneNumber) {
       this.setState({
-        numberError: !number
+        numberError: !phoneNumber
       });
       return handlers.showToast(
         "S'il vous plait, entrez votre numéro de téléphone!",
@@ -33,7 +40,7 @@ export default class Step1 extends React.Component {
     try {
       const confirmResult = await signIn(number);
       this.props.saveState("0", confirmResult);
-      this.props.saveState("1", { phoneNumber: number });
+      this.props.saveState("1", { phoneNumber: phoneNumber });
       this.props.nextFn();
     } catch (error) {
       console.log("TCL: Signup -> sendOTP -> error", error);
@@ -41,8 +48,15 @@ export default class Step1 extends React.Component {
     }
   };
 
+  updateProps = (key, value) => {
+    const data = this.props.getState()[1] || {};
+    data[key] = value;
+    this.props.saveState("1", data);
+    this.setState({ [key]: value });
+  };
+
   render() {
-    const { number } = this.state;
+    const { phoneNumber } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
@@ -57,7 +71,8 @@ export default class Step1 extends React.Component {
               <Input
                 style={styles.inputStyle}
                 keyboardType="phone-pad"
-                onChangeText={number => this.setState({ number })}
+                value={phoneNumber}
+                onChangeText={number => this.updateProps("phoneNumber", number)}
               />
             </Item>
           </View>

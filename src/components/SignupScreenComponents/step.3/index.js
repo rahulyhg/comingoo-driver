@@ -11,19 +11,30 @@ export default class Step3 extends React.Component {
     super(props);
 
     this.state = {
-      name: "",
+      fullName: "",
       email: "",
       password: "",
       confirmpassword: ""
     };
   }
 
+  componentDidMount() {
+    const data = this.props.getState()[1] || {};
+    console.log("TCL: Step3 -> componentDidMount -> data", data);
+    this.setState({
+      fullName: data.fullName || "",
+      email: data.email || "",
+      password: data.password || "",
+      confirmpassword: data.password || ""
+    });
+  }
+
   next = () => {
-    const { name, email, password, confirmpassword } = this.state;
-    const data = this.props.getState()[1];
+    const { fullName, email, password, confirmpassword } = this.state;
+    const data = this.props.getState()[1] || {};
 
     try {
-      if (!name && !email && !password && !confirmpassword) {
+      if (!fullName && !email && !password && !confirmpassword) {
         throw { message: "Please fill all fields!" };
       }
       if (password.length < 6) {
@@ -35,7 +46,7 @@ export default class Step3 extends React.Component {
         throw { message: "Please enter a proper email" };
       }
 
-      data.fullName = name;
+      data.fullName = fullName;
       data.email = email;
       data.password = password;
       this.props.saveState(1, data);
@@ -49,7 +60,15 @@ export default class Step3 extends React.Component {
     this.props.prevFn();
   };
 
+  updateProps = (key, value) => {
+    const data = this.props.getState()[1] || {};
+    data[key] = value;
+    this.props.saveState("1", data);
+    this.setState({ [key]: value });
+  };
+
   render() {
+    const { email, password, fullName, confirmpassword } = this.state;
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
@@ -66,15 +85,19 @@ export default class Step3 extends React.Component {
                 <Label style={styles.labelStyle}>Nom complet</Label>
                 <Input
                   style={styles.inputStyle}
-                  onChangeText={name => this.setState({ name })}
+                  value={fullName}
+                  onChangeText={fullName =>
+                    this.updateProps("fullName", fullName)
+                  }
                 />
               </Item>
               <Item stackedLabel style={styles.inputs}>
                 <Label style={styles.labelStyle}>Email</Label>
                 <Input
                   style={styles.inputStyle}
+                  value={email}
                   keyboardType="email-address"
-                  onChangeText={email => this.setState({ email })}
+                  onChangeText={email => this.updateProps("email", email)}
                 />
               </Item>
               <Item stackedLabel style={styles.inputs}>
@@ -82,7 +105,10 @@ export default class Step3 extends React.Component {
                 <Input
                   style={styles.inputStyle}
                   secureTextEntry={true}
-                  onChangeText={password => this.setState({ password })}
+                  value={password}
+                  onChangeText={password =>
+                    this.updateProps("password", password)
+                  }
                 />
               </Item>
               <Item stackedLabel style={styles.inputs}>
@@ -92,6 +118,7 @@ export default class Step3 extends React.Component {
                 <Input
                   style={styles.inputStyle}
                   secureTextEntry={true}
+                  value={confirmpassword}
                   onChangeText={confirmpassword =>
                     this.setState({ confirmpassword })
                   }
