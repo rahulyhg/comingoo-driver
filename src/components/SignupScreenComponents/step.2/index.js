@@ -88,7 +88,6 @@ class Step2 extends React.Component {
           <TouchableOpacity style={styles.backBtn} onPress={() => this.back()}>
             <Image style={styles.btnImageLeft} source={icons.right_arrow} />
           </TouchableOpacity>
-
           <TouchableOpacity
             style={styles.nextBtn}
             onPress={() => this.verifyOTP()}

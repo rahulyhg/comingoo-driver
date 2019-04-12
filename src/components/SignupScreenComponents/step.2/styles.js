@@ -3,33 +3,32 @@ const { width, height } = Dimensions.get("window");
 import { colors } from "../../../constants";
 
 export default StyleSheet.create({
- container: {
+  container: {
     flex: 1,
-    height: height,
+    height: height * 0.88,
     backgroundColor: colors.bluePrimary
-     //backgroundColor : (Platform.OS === 'ios') ? 'red' : 'green'
+    //backgroundColor : (Platform.OS === 'ios') ? 'red' : 'green'
   },
 
   topContainer: {
-    justifyContent: 'center',
-    alignItems : 'center',
-    paddingTop : height * 0.10
-    
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: height * 0.1,
+    flex: 1.3
   },
 
   headingTxt: {
-    fontSize : width * 0.13,
-   fontWeight: '200',
-    color : 'white',
+    fontSize: width * 0.13,
+    fontWeight: "200",
+    color: "white"
   },
 
   subHeadingTxt: {
-    fontSize : (Platform.OS === 'ios') ? 15 : 18,
+    fontSize: Platform.OS === "ios" ? 15 : 18,
     paddingTop: 40,
-    paddingLeft: (Platform.OS === 'ios') ? 3 : 2,
-    color : '#E5E5E5',
-    textAlign : 'center',
-    
+    paddingLeft: Platform.OS === "ios" ? 3 : 2,
+    color: "#E5E5E5",
+    textAlign: "center"
   },
 
   middleContainer: {
@@ -63,37 +62,36 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.30,
-    marginLeft : 5,
-    
+    marginBottom: height * 0.3,
+    marginLeft: 5
   },
 
-  backBtn : {
+  backBtn: {
     backgroundColor: colors.light,
     width: 60,
     height: 60,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 1000,
-    marginBottom: height * 0.30,
-    
-    marginRight : 5
+    marginBottom: height * 0.3,
+
+    marginRight: 5
   },
 
   bottomContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "flex-start",
+    flex: 1
   },
 
   btnImage: {
     width: "80%",
-    height: "60%",
-   
+    height: "60%"
   },
   btnImageLeft: {
     width: "80%",
     height: "60%",
-    transform: [{ rotate: '180deg'}]
+    transform: [{ rotate: "180deg" }]
   }
 });
