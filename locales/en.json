@@ -11,7 +11,13 @@
     "success_sent_sms": "SMS sent to your phone.",
     "reset_your_password": "Reset your password",
     "phone_number": "Phone Number",
-    "okay": "Okay"
+    "okay": "Okay",
+    "new_password": "new password",
+    "confirm_new_password": "confirm new password",
+    "otp_error": "Please enter OTP first.",
+    "phone_number_error": "Please, enter your phone number!",
+    "code_send": "code send!",
+    "try_again": "something went wrong! try again!"
   },
   "login": {
     "missing_input": "Please complete all fields!",

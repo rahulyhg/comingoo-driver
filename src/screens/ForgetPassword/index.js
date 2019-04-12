@@ -15,6 +15,7 @@ import {
   stopOrStartLoader,
   resetErrorAndLoading
 } from "../../store/auth/actions";
+import { strings } from "../../i18n";
 
 class ForgetPassword extends React.Component {
   constructor(props) {
@@ -77,8 +78,9 @@ class ForgetPassword extends React.Component {
         numberError: !number
       });
       return handlers.showToast(
-        "S'il vous plait, entrez votre numéro de téléphone!",
-        "danger"
+        strings("forgot_password.phone_number_error"),
+        "danger",
+        5000
       );
     }
 
@@ -90,8 +92,8 @@ class ForgetPassword extends React.Component {
       this.next();
       reset();
     } catch (error) {
-      handlers.showToast(error.message, "danger");
       reset();
+      handlers.showToast(error.message, "danger");
     }
   };
 
@@ -106,13 +108,19 @@ class ForgetPassword extends React.Component {
           this.setState({ confirmResult: phoneAuthSnapshot });
           switch (phoneAuthSnapshot.state) {
             case firebase.auth.PhoneAuthState.CODE_SENT: // or 'sent'
-              handlers.showToast("Code send!", "success");
+              handlers.showToast(
+                strings("forgot_password.code_send"),
+                "success"
+              );
               this.next();
               break;
             case firebase.auth.PhoneAuthState.ERROR: // or 'error'
               console.log("verification error");
               console.log(phoneAuthSnapshot.error);
-              handlers.showToast("something went wrong! try again!", "danger");
+              handlers.showToast(
+                strings("forgot_password.try_again"),
+                "danger"
+              );
               break;
             case firebase.auth.PhoneAuthState.AUTO_VERIFY_TIMEOUT: // or 'timeout'
               console.log("auto verify on android timed out");
@@ -141,7 +149,11 @@ class ForgetPassword extends React.Component {
     const { otp, confirmResult } = this.state;
     const { hanldeLoader, reset } = this.props;
     if (!otp) {
-      return handlers.showToast("S'il vous plaît entrez d'abord OTP", "danger");
+      return handlers.showToast(
+        strings("forgot_password.otp_error"),
+        "danger",
+        5000
+      );
     }
     hanldeLoader();
 
@@ -166,7 +178,9 @@ class ForgetPassword extends React.Component {
     return (
       <View style={[styles.fieldContainer, styles.newPassword]}>
         <View stackedLabel style={styles.inputs}>
-          <Label style={styles.labelStyle}>Mot de passe</Label>
+          <Label style={styles.labelStyle}>
+            {strings("forgot_password.new_password")}
+          </Label>
           <Item>
             <Input
               style={styles.inputStyle}
@@ -182,7 +196,7 @@ class ForgetPassword extends React.Component {
             </TouchableOpacity>
           </Item>
           <Label style={[styles.labelStyle, { marginTop: "4%" }]}>
-            Retaper le mot de passe
+            {strings("forgot_password.confirm_new_password")}
           </Label>
           <Item>
             <Input
@@ -208,7 +222,9 @@ class ForgetPassword extends React.Component {
     return (
       <View style={styles.numberContainer}>
         <Item stackedLabel style={styles.inputs} error={numberError}>
-          <Label style={styles.labelStyle}>Numéro de téléphone</Label>
+          <Label style={styles.labelStyle}>
+            {strings("forgot_password.phone_number")}
+          </Label>
           <Input
             style={styles.inputStyle}
             keyboardType="phone-pad"
@@ -252,10 +268,10 @@ class ForgetPassword extends React.Component {
         <View style={styles.topContainer}>
           <Text style={styles.headingTxt}>
             {step == 1
-              ? "réinitialisez votre mot de passe"
+              ? strings("forgot_password.reset_your_password")
               : step == 2
-              ? "réinitialisez votre mot de passe"
-              : "Entrez votre nouveau mot de passe"}
+              ? strings("forgot_password.reset_your_password")
+              : strings("forgot_password.missing_phone_number")}
           </Text>
         </View>
         <View style={styles.middleContainer}>

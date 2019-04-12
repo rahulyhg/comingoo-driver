@@ -11,7 +11,13 @@
     "success_sent_sms": "un SMS est envoyé sur votre numéro",
     "reset_your_password": "réinitialisez votre mot de passe",
     "phone_number": "Numéro de téléphone",
-    "okay": "d'accord"
+    "okay": "d'accord",
+    "new_password": "nouveau mot de passe",
+    "confirm_new_password": "confirmer le nouveau mot de passe",
+    "otp_error": "S'il vous plaît entrer d'abord OTP",
+    "phone_number_error": "S'il vous plait, entrez votre numéro de téléphone!",
+    "code_send": "Code envoyer",
+    "try_again": "quelque chose s'est mal passé! réessayer!"
   },
   "login": {
     "missing_input": "Veuillez remplir tous les champs!",

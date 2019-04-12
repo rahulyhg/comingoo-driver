@@ -130,6 +130,7 @@ class Login extends React.Component {
                   onPress={() => this.navigate("ForgetPassword")}
                 >
                   <Text style={styles.mediumTxt}>
+                    {" "}
                     {strings("login.click_here")}
                   </Text>
                 </TouchableOpacity>
