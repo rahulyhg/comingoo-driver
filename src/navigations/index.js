@@ -3,7 +3,9 @@ import { createAppContainer, createStackNavigator, createDrawerNavigator, create
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
 import Home from "../screens/Home";
-import ForgetPassword from "../screens/ForgerPassword";
+import ForgetPassword from "../screens/ForgetPassword";
+import Dashboard from "../screens/Dashboard"
+import DriverMap from '../screens/Map';
 
 // For app drawer
 import SideMenu from '../components/SideMenu/index'
@@ -47,7 +49,7 @@ const MainStack = createStackNavigator(
     Login: { screen: Login },
     Signup: { screen: Signup },
     ForgetPassword: { screen: ForgetPassword },
-   
+    Map: { screen:  DriverMap}
   },
   {
     initialRouteName: "Home"

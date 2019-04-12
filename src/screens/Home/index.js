@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import { Text, View, Image, ScrollView, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
 import { images } from "../../utils";
 import styles from "./styles";
 
-export default class Home extends Component {
+import { resetErrorAndLoading } from "../../store/auth/actions";
+import { strings } from "../../i18n";
+
+class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      const { resetErrorAndLoading } = this.props;
+      resetErrorAndLoading();
+    }, 100);
   }
 
   navigate = route => {
@@ -29,9 +40,11 @@ export default class Home extends Component {
         <View style={styles.middleContainer}>
           <View style={styles.middleInnerContainer}>
             <View style={styles.middleTextContainer}>
-              <Text style={styles.smallTxt}>Vous n'avez pas de comple?</Text>
+              <Text style={styles.smallTxt}>
+                {strings("home.dont_have_an_account")}
+              </Text>
               <TouchableOpacity onPress={() => this.navigate("Signup")}>
-                <Text style={styles.mediumTxt}>S'inscrire</Text>
+                <Text style={styles.mediumTxt}>{strings("home.register")}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -39,15 +52,17 @@ export default class Home extends Component {
         <View style={styles.bottomContainer}>
           <View style={styles.bottomInnerContainer}>
             <View style={styles.bottomTextContainer}>
-              <Text style={styles.smallTxt}>Vous avez deja un compte?</Text>
+              <Text style={styles.smallTxt}>
+                {strings("home.already_have_an_account")}
+              </Text>
               <TouchableOpacity onPress={() => this.navigate("Login")}>
-                <Text style={styles.mediumTxt}>Se connecter</Text>
+                <Text style={styles.mediumTxt}>{strings("home.login")}</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.footerContainer}>
             <Text style={styles.regularTxt}>
-              Recherchez-vous I'application du passenger?
+              {strings("home.looking_for_rider_app")}
             </Text>
           </View>
         </View>
@@ -55,3 +70,14 @@ export default class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  resetErrorAndLoading: () => dispatch(resetErrorAndLoading())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

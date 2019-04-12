@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "1031982693362",
+    "firebase_url": "https://comingoo-236512.firebaseio.com",
+    "project_id": "comingoo-236512",
+    "storage_bucket": "comingoo-236512.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031982693362:android:9401928db19db073",
+        "android_client_info": {
+          "package_name": "com.comingoo.rider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031982693362-89h3k6mri4nl2gu8hjkr0vhejuto22q6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.comingoo.rider",
+            "certificate_hash": "5a66b8e66f42f398efadc88599906a031718da05"
+          }
+        },
+        {
+          "client_id": "1031982693362-2031uos35cflb78df83a13u8qur6trhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSZNJheGqTEQg_FjK2bPO2l6Ud3d8N1OQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031982693362-2031uos35cflb78df83a13u8qur6trhm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1031982693362-h151vq1mtssrdk4hvs1s9a61vefbtjtg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.ComingooDriverApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031982693362:android:f6d1543907651402",
+        "android_client_info": {
+          "package_name": "com.comingoodriverapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1031982693362-fvstbrr2aa1rkcplmc5sd5ldjuuiaekb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.comingoodriverapp",
+            "certificate_hash": "5a3724268393a8f842b974ff94573cb30f05a7d3"
+          }
+        },
+        {
+          "client_id": "1031982693362-2031uos35cflb78df83a13u8qur6trhm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSZNJheGqTEQg_FjK2bPO2l6Ud3d8N1OQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1031982693362-2031uos35cflb78df83a13u8qur6trhm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1031982693362-h151vq1mtssrdk4hvs1s9a61vefbtjtg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.ComingooDriverApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,84 @@
-import { put, takeEvery, delay } from "redux-saga/effects";
+import { put, takeEvery, takeLatest, select } from "redux-saga/effects";
+import { ERROR, LOGIN, LOGIN_SUCCESS, SIGNUP_REQUEST, SIGNUP_SUCCESS, RESETPASSWORD , RESETPASSWORD_SUCCESS } from "./types";
 
-import { LOGIN, LOGOUT, ERROR, UPDATE_USER } from "./types";
+const base_url = "https://comingoo.herokuapp.com/drivers";
 
-function* getUser() {
-  const rawRes = yield fetch("https://jsonplaceholder.typicode.com/todos/1");
-  const data = yield rawRes.json();
-  yield put({ type: UPDATE_USER, payload: data });
+function* handleSignupRequest({ payload }) {
+  console.log("TCL: function*handleSignupRequest -> payload", payload);
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  };
+
+  try {
+    const rawData = yield fetch(`${base_url}/registerDriver`, options);
+    const response = yield rawData.json();
+    console.log("TCL: function*handleSignupRequest -> response", response);
+    if (rawData.status != 201) {
+      console.log("TCL: function*handleSignupRequest -> rawData", rawData);
+      throw response;
+    }
+    yield put({ type: SIGNUP_SUCCESS, payload: response });
+  } catch (error) {
+    console.log("TCL: function*handleSignupRequest -> error", error);
+    yield put({ type: ERROR, payload: error });
+  }
 }
 
-export function* watchLogin() {
-  yield takeEvery(LOGIN, getUser);
+
+function* loginRequest({ payload }) {
+
+    const headerOption = {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+        };
+
+        try {
+            const data = yield fetch(`${base_url}/loginDriver`, headerOption);
+            const response = yield data.json();
+            if(data.status == 202){
+               yield put({ type: RESETPASSWORD_SUCCESS, payload: response });
+            } else {
+              throw response;
+            }
+        } catch (e){
+              yield put({ type: ERROR, payload: e.message });
+        }
+
+}
+
+function* handleResetPasswordRequest({ payload }) =>{
+
+  const headerOption = {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(payload)
+      };
+      try {
+          const data = yield fetch(`${base_url}/passwordReset`, headerOption);
+          const response = yield data.json();
+          if(data.status == 202){
+             yield put({ type: RESETPASSWORD_SUCCESS, payload: response });
+          } else {
+            throw response;
+          }
+      } catch (e){
+            yield put({ type: ERROR, payload: e.message });
+      }
+}
+
+
+export function* watchAuth() {
+  yield takeLatest(LOGIN, loginRequest);
+  yield takeLatest(SIGNUP_REQUEST, handleSignupRequest);
+  yield takeLatest(RESETPASSWORD, handleResetPasswordRequest);
 }
