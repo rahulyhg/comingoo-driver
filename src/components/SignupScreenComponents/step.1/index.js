@@ -47,7 +47,7 @@ class Step1 extends React.Component {
     handleLoader();
 
     try {
-      const confirmResult = await signIn(number);
+      const confirmResult = await signIn(phoneNumber);
       this.props.saveState("0", confirmResult);
       this.props.saveState("1", { phoneNumber: phoneNumber });
       reset();
