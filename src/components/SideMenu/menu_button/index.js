@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
-import { DrawerActions } from "react-navigation-drawer";
+import { withNavigation, DrawerActions } from "react-navigation";
 
 import { icons } from "../../../utils/index";
 import styles from "./styles";
@@ -8,7 +8,6 @@ import styles from "./styles";
 class MenuButton extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 
@@ -30,4 +29,4 @@ class MenuButton extends React.Component {
   }
 }
 
-export default MenuButton;
+export default withNavigation(MenuButton);

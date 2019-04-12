@@ -35,7 +35,7 @@ class Login extends React.Component {
     this.setState({ loader });
     if (user) {
       console.log("TCL: Login -> user", user);
-      this.props.navigation.navigate("Map");
+      this.props.navigation.navigate("Drawer");
       reset();
       return handlers.showToast("Login Successfully!", "success");
     }

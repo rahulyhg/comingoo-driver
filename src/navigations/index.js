@@ -52,8 +52,7 @@ const MainStack = createStackNavigator(
     },
     Login: { screen: Login },
     Signup: { screen: Signup },
-    ForgetPassword: { screen: ForgetPassword },
-    Map:{ screen: DriverMap}
+    ForgetPassword: { screen: ForgetPassword }
   },
   {
     initialRouteName: "Home"
@@ -62,7 +61,7 @@ const MainStack = createStackNavigator(
 
 const AppNavigator = createSwitchNavigator({
   AuthStack: MainStack,
-  Drawer: AppDrawer,
+  Drawer: AppDrawer
 });
 
 export default createAppContainer(AppNavigator);

@@ -15,6 +15,7 @@ import { handlers } from "../../helpers";
 import MenuBtn from "../../components/SideMenu/menu_button/";
 
 import styles from "./styles";
+import { colors } from "../../constants";
 
 class Map extends React.Component {
   static navigationOptions = navigation => ({
@@ -25,7 +26,8 @@ class Map extends React.Component {
     super(props);
     this.state = {
       coords: null,
-      mapRegion: null
+      mapRegion: null,
+      loading: true
     };
   }
 
@@ -41,17 +43,17 @@ class Map extends React.Component {
   // Start: Current Location of Driver
   _getLocation = async () => {
     await navigator.geolocation.watchPosition(position => {
-      this.setState({ coords: position.coords });
+      this.setState({ coords: position.coords, loading: false });
     });
   };
   // End: Current Location of Driver
 
   render() {
-    const { coords } = this.state;
-    if (!coords) {
+    const { coords, loading } = this.state;
+    if (loading) {
       return (
         <View style={styles.acIndicator}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color={colors.bluePrimary} />
         </View>
       );
     } else {
@@ -75,7 +77,7 @@ class Map extends React.Component {
               description={"Comoongo"}
             />
           </MapView>
-          <MenuBtn navigation={this.props.navigation} />
+          <MenuBtn />
         </View>
       );
     }
