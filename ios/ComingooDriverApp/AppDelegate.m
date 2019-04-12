@@ -30,7 +30,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [GMSServices provideAPIKey:@"AIzaSyBMzRSL2CWtCQkxUhbdK2Zb0r3M6kDhVj8"];
+  [GMSServices provideAPIKey:@"AIzaSyAVeZaDPg3tMjnREMFNpJqsD6R00L7487Q"];
 
   return YES;
 }
