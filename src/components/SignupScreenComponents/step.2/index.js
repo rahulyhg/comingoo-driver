@@ -34,7 +34,7 @@ class Step2 extends React.Component {
 
   verifyOTP = async () => {
     const { otp, confirmResult } = this.state;
-    const { handleLoader, reset } = this.state;
+    const { handleLoader, reset } = this.props;
 
     if (!otp) {
       return handlers.showToast("S'il vous plaît entrez d'abord OTP", "danger");
