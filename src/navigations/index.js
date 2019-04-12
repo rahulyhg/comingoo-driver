@@ -22,7 +22,7 @@ import Inbox from "../screens/Inbox";
 const AppDrawer = createDrawerNavigator(
   {
     Dashboard: {
-      screen: Dashboard
+      screen: DriverMap
     },
     History: {
       screen: History
@@ -62,7 +62,7 @@ const MainStack = createStackNavigator(
 
 const AppNavigator = createSwitchNavigator({
   AuthStack: MainStack,
-  Drawer: AppDrawer
+  Drawer: AppDrawer,
 });
 
 export default createAppContainer(AppNavigator);
