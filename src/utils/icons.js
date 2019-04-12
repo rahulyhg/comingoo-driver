@@ -5,7 +5,7 @@ export default {
   aide_icon: require("../assets/icons/aide.png"),
   heart_icon: require("../assets/icons/heart.png"),
   history: require("../assets/icons/history.png"),
-  inbox_icon: require("../assets/icons/inbox.png"),
+  inbox_icon: require("../assets/icons/Inbox.png"),
   sout_icon: require("../assets/icons/signout.png"),
   home_icon: require("../assets/icons/home.png"),
   menubutton: require("../assets/icons/menubtn.png"),
