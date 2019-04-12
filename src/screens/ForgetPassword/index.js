@@ -5,7 +5,7 @@ import { Item, Label, Input } from "native-base";
 import firebase from "react-native-firebase";
 
 import { handlers } from "../../helpers";
-import { confirmCode, signIn } from '../../config/firebase'
+import { confirmCode, signIn } from "../../config/firebase";
 
 import styles from "./styles";
 import { colors } from "../../constants";
@@ -40,22 +40,23 @@ class ForgetPassword extends React.Component {
   };
 
   componentWillReceiveProps = nextProps => {
-       const { message } = nextProps;	    // signOut();
-       this.setState({ step: step + 1 });
-       if(message){
-         this.props.navigation.navigate('Map');
-          return handlers.showToast('Password reset successful', "success");
-        }
-  }
+    const { successMessage, error } = nextProps;
+    if (successMessage) {
+      this.props.navigation.navigate("Login");
+      return handlers.showToast(successMessage, "success");
+    } else if (error) {
+      return handlers.showToast(error, "danger");
+    }
+  };
 
-  resetPassword =  async() => {
+  resetPassword = async () => {
     const { handleResetRequest } = this.props;
-    const payload={
+    const payload = {
       phoneNumber: this.state.number,
       password: this.state.password
-    }
-    await handleResetRequest(payload)
-  }
+    };
+    await handleResetRequest(payload);
+  };
 
   sendOTP = async () => {
     const { number } = this.state;
@@ -71,13 +72,9 @@ class ForgetPassword extends React.Component {
     }
 
     try {
-      if (Platform.OS == 'android') {
-        this.verifyPhoneNumber(number);
-      } else {
-        const confirmResult = await signIn(number);
-        this.setState({ confirmResult })
-        this.next()
-      }
+      const confirmResult = await signIn(number);
+      this.setState({ confirmResult });
+      this.next();
     } catch (error) {
       handlers.showToast(error.message, "danger");
     }
@@ -91,7 +88,7 @@ class ForgetPassword extends React.Component {
         "state_changed",
         phoneAuthSnapshot => {
           console.log("TCL: phoneAuthSnapshot", phoneAuthSnapshot);
-          this.setState({ confirmResult: phoneAuthSnapshot })
+          this.setState({ confirmResult: phoneAuthSnapshot });
           switch (phoneAuthSnapshot.state) {
             case firebase.auth.PhoneAuthState.CODE_SENT: // or 'sent'
               handlers.showToast("Code send!", "success");
@@ -126,26 +123,24 @@ class ForgetPassword extends React.Component {
   };
 
   verifyOTP = async () => {
-    const { otp, confirmResult } = this.state
+    const { otp, confirmResult } = this.state;
     if (!otp) {
-      return handlers.showToast(
-        "S'il vous plaît entrez d'abord OTP",
-        "danger"
-      );
+      return handlers.showToast("S'il vous plaît entrez d'abord OTP", "danger");
     }
 
     const payload = {
-      confirmResult, otp
-    }
+      confirmResult,
+      otp
+    };
     try {
-      const user = await confirmCode(payload)
-      console.log(user)
-      this.next()
+      const user = await confirmCode(payload);
+      console.log(user);
+      this.next();
     } catch (error) {
-      console.log('error', error)
-      handlers.showToast(error.message, 'danger')
+      console.log("error", error);
+      handlers.showToast(error.message, "danger");
     }
-  }
+  };
 
   newPassword = () => {
     const { passwordError, password, cPassword, showPassword } = this.state;
@@ -240,16 +235,16 @@ class ForgetPassword extends React.Component {
             {step == 1
               ? "réinitialisez votre mot de passe"
               : step == 2
-                ? "réinitialisez votre mot de passe"
-                : "Entrez votre nouveau mot de passe"}
+              ? "réinitialisez votre mot de passe"
+              : "Entrez votre nouveau mot de passe"}
           </Text>
         </View>
         <View style={styles.middleContainer}>
           {step == 1
             ? this.numberInput()
             : step == 2
-              ? this.otpInput()
-              :  this.newPassword()}
+            ? this.otpInput()
+            : this.newPassword()}
         </View>
       </View>
     );
@@ -257,11 +252,12 @@ class ForgetPassword extends React.Component {
 }
 
 const mapStateToProps = state => ({
-   message: state.authReducer.resetMessage
+  message: state.authReducer.successMessage,
+  error: state.authReducer.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleResetRequest: payload =>  dispatch(onReset(payload))
+  handleResetRequest: payload => dispatch(onReset(payload))
 });
 
 export default connect(

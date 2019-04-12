@@ -10,7 +10,9 @@ import {
   IMAGE_UPLOAD_REQUEST,
   IMAGE_UPLOAD_SUCCESS,
   RESETPASSWORD,
-  RESETPASSWORD_SUCCESS
+  RESETPASSWORD_SUCCESS,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS
 } from "./types";
 
 firebase.initializeApp(firebaseConfig);
@@ -133,8 +135,12 @@ function* handleResetPasswordRequest({ payload }) {
   try {
     const data = yield fetch(`${base_url}/passwordReset`, headerOption);
     const response = yield data.json();
+    console.log(
+      "TCL: function*handleResetPasswordRequest -> response",
+      response
+    );
     if (data.status == 202) {
-      yield put({ type: RESETPASSWORD_SUCCESS, payload: response });
+      yield put({ type: RESET_PASSWORD_SUCCESS, payload: response.message });
     } else {
       throw response;
     }
@@ -147,5 +153,5 @@ export function* watchAuth() {
   yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, handleSignupRequest);
   yield takeLatest(IMAGE_UPLOAD_REQUEST, handleImageUpload);
-  yield takeLatest(RESETPASSWORD, handleResetPasswordRequest);
+  yield takeLatest(RESET_PASSWORD_REQUEST, handleResetPasswordRequest);
 }

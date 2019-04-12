@@ -5,7 +5,7 @@ import {
   LOGOUT,
   UPDATE_USER,
   IMAGE_UPLOAD_REQUEST,
-  RESETPASSWORD,
+  RESET_PASSWORD_REQUEST,
   LOGIN_REQUEST
 } from "./types";
 
@@ -38,6 +38,6 @@ export const updataUser = payload => ({
 });
 
 export const onReset = payload => ({
-  type: RESETPASSWORD,
+  type: RESET_PASSWORD_REQUEST,
   payload
 });

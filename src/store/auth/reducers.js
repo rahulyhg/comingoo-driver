@@ -11,7 +11,9 @@ import {
   IMAGE_UPLOAD_SUCCESS,
   RESETPASSWORD,
   RESETPASSWORD_SUCCESS,
-  LOGIN_REQUEST
+  LOGIN_REQUEST,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_SUCCESS
 } from "./types";
 
 const initialState = {
@@ -63,12 +65,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         user: { ...state.user, ...action.payload }
       };
-    case RESETPASSWORD:
-      return { ...state, resetMessage: "" };
-    case RESETPASSWORD_SUCCESS:
+    case RESET_PASSWORD_REQUEST:
+      return {
+        ...state
+      };
+    case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
-        resetMessage: action.payload
+        successMessage: action.payload
       };
     case ERROR:
       return {
@@ -83,7 +87,6 @@ const reducer = (state = initialState, action) => {
         error: "",
         loader: false,
         successMessage: "",
-        user: null,
         url: {}
       };
     default:
