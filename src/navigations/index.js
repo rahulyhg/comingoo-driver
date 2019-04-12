@@ -22,7 +22,7 @@ import Inbox from "../screens/Inbox";
 const AppDrawer = createDrawerNavigator(
   {
     Dashboard: {
-      screen: DriverMap
+      screen: Dashboard
     },
     History: {
       screen: History
