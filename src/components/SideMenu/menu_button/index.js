@@ -8,7 +8,7 @@ render(){
     return(
         <TouchableOpacity
         style={styles.menuButton}
-        onPress={() => this.props.navigation.navigate('DrawerToggle')}
+        onPress={() => this.props.navigation.toggleDrawer()}
         >
         <Image
         source={icons.menubutton}
