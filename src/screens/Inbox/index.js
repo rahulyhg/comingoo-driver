@@ -5,7 +5,7 @@ import styles from "./styles";
 import { colors } from "../../constants";
 import MenuBtn from '../../components/SideMenu/menu_button';
 
-export class Dashboard extends Component {
+export class Inbox extends Component {
   constructor(props) {
     super(props);
 
@@ -29,11 +29,11 @@ export class Dashboard extends Component {
     const { numberError, number } = this.state;
     return (
       <View style={styles.container}>
-        <MenuBtn navigation={this.props.navigation} />
-          <Text>
-           Dashboard
-          </Text>
-        </View>
+      <MenuBtn navigation={this.props.navigation} />
+        <Text>
+         Inbox
+        </Text>
+      </View>
 
     );
   }
@@ -46,4 +46,4 @@ const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Dashboard);
+)(Inbox);

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { View, Text} from "react-native";
+import { View, Text } from "react-native";
 import { connect } from "react-redux";
 import styles from "./styles";
 import { colors } from "../../constants";
 import MenuBtn from '../../components/SideMenu/menu_button';
 
-export class Dashboard extends Component {
+export class Comingoo_you extends Component {
   constructor(props) {
     super(props);
 
@@ -29,11 +29,11 @@ export class Dashboard extends Component {
     const { numberError, number } = this.state;
     return (
       <View style={styles.container}>
-        <MenuBtn navigation={this.props.navigation} />
-          <Text>
-           Dashboard
-          </Text>
-        </View>
+      <MenuBtn navigation={this.props.navigation} />
+        <Text>
+         Comingoo You
+        </Text>
+      </View>
 
     );
   }
@@ -46,4 +46,4 @@ const mapDispatchToProps = {};
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Dashboard);
+)(Comingoo_you);

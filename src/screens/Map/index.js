@@ -5,6 +5,8 @@ import { Item, Label, Input } from "native-base";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from 'react-native-maps';
 import { handlers } from "../../helpers";
+import MenuBtn from '../../components/SideMenu/menu_button/';
+
 import styles from './styles';
 
 class Map extends React.Component {
@@ -20,6 +22,11 @@ class Map extends React.Component {
         mapRegion: null,
       };
     }
+
+    navigate = route => {
+      const { navigation } = this.props;
+      navigation.navigate(route);
+    };
 
     componentDidMount(){
       this._getLocation()
@@ -45,6 +52,7 @@ class Map extends React.Component {
             var latlng = {latitude: coords.latitude, longitude: coords.longitude}
             return (
                <View style={styles.container}>
+                  <MenuBtn navigation={this.props.navigation} />
                   <MapView
                     provider={PROVIDER_GOOGLE} // remove if not using Google Maps
                     style={styles.map}

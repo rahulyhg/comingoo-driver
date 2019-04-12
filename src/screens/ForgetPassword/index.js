@@ -43,6 +43,7 @@ class ForgetPassword extends React.Component {
   next = () => {
     const { step } = this.state;
     this.setState({ step: step + 1 });
+
   };
 
   componentWillReceiveProps = nextProps => {
@@ -123,14 +124,10 @@ class ForgetPassword extends React.Component {
               );
               break;
             case firebase.auth.PhoneAuthState.AUTO_VERIFY_TIMEOUT: // or 'timeout'
-              console.log("auto verify on android timed out");
               handlers.showToast("auto verify on android timed out", "info");
               break;
             case firebase.auth.PhoneAuthState.AUTO_VERIFIED: // or 'verified'
-              handlers.showToast("auto verify on android", "success");
-              console.log(phoneAuthSnapshot.code);
               this.setState({ otp: phoneAuthSnapshot.code || "" });
-              console.log(phoneAuthSnapshot);
               this.next();
               break;
           }
