@@ -16,10 +16,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      const { resetErrorAndLoading } = this.props;
-      resetErrorAndLoading();
-    }, 100);
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { resetErrorAndLoading } = nextProps;
+    resetErrorAndLoading();
   }
 
   navigate = route => {

@@ -31,19 +31,25 @@ class Login extends React.Component {
   });
 
   componentWillReceiveProps = nextProps => {
-    const { error, user } = nextProps;
+    const { error, user, loader, reset } = nextProps;
     if (user) {
       console.log("TCL: Login -> user", user);
       this.props.navigation.navigate("Map");
+      reset();
       return handlers.showToast("Login Successfully!", "success");
-    } else if (error) {
+    }
+    if (error) {
       console.log("TCL: Login -> error", error);
       return handlers.showToast(error, "danger");
+    }
+    if (loader != this.state.loader) {
+      this.setState({ loader });
     }
   };
 
   login = async () => {
     const { number, password } = this.state;
+    const { reset, handleLogin } = this.props;
     if (!number || !password) {
       this.setState({
         numberError: !number,
@@ -51,7 +57,6 @@ class Login extends React.Component {
       });
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
     } else {
-      const { reset, handleLogin } = this.props;
       await reset();
 
       const payload = {
@@ -73,7 +78,8 @@ class Login extends React.Component {
       number,
       password,
       passwordError,
-      numberError
+      numberError,
+      loader
     } = this.state;
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
@@ -136,6 +142,7 @@ class Login extends React.Component {
             </View>
           </View>
         </View>
+        {loader && handlers.overlayLoader()}
       </ScrollView>
     );
   }

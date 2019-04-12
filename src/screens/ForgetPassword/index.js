@@ -10,7 +10,11 @@ import { confirmCode, signIn } from "../../config/firebase";
 import styles from "./styles";
 import { colors } from "../../constants";
 import { icons } from "../../utils";
-import { onReset } from "../../store/auth/actions";
+import {
+  onReset,
+  stopOrStartLoader,
+  resetErrorAndLoading
+} from "../../store/auth/actions";
 
 class ForgetPassword extends React.Component {
   constructor(props) {
@@ -25,7 +29,8 @@ class ForgetPassword extends React.Component {
       password: "",
       cPassword: "",
       showPassword: false,
-      confirmResult: null
+      confirmResult: null,
+      loader: false
     };
   }
 
@@ -40,12 +45,17 @@ class ForgetPassword extends React.Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    const { successMessage, error } = nextProps;
+    const { successMessage, error, loader, reset } = nextProps;
     if (successMessage) {
       this.props.navigation.navigate("Login");
-      return handlers.showToast(successMessage, "success");
-    } else if (error) {
+      handlers.showToast(successMessage, "success");
+      return reset();
+    }
+    if (error) {
       return handlers.showToast(error, "danger");
+    }
+    if (loader != this.state.loader) {
+      this.setState({ loader });
     }
   };
 
@@ -60,6 +70,7 @@ class ForgetPassword extends React.Component {
 
   sendOTP = async () => {
     const { number } = this.state;
+    const { hanldeLoader, reset } = this.props;
 
     if (!number) {
       this.setState({
@@ -71,12 +82,16 @@ class ForgetPassword extends React.Component {
       );
     }
 
+    hanldeLoader();
+
     try {
       const confirmResult = await signIn(number);
       this.setState({ confirmResult });
       this.next();
+      reset();
     } catch (error) {
       handlers.showToast(error.message, "danger");
+      reset();
     }
   };
 
@@ -124,9 +139,11 @@ class ForgetPassword extends React.Component {
 
   verifyOTP = async () => {
     const { otp, confirmResult } = this.state;
+    const { hanldeLoader, reset } = this.props;
     if (!otp) {
       return handlers.showToast("S'il vous plaît entrez d'abord OTP", "danger");
     }
+    hanldeLoader();
 
     const payload = {
       confirmResult,
@@ -135,9 +152,11 @@ class ForgetPassword extends React.Component {
     try {
       const user = await confirmCode(payload);
       console.log(user);
+      reset();
       this.next();
     } catch (error) {
       console.log("error", error);
+      reset();
       handlers.showToast(error.message, "danger");
     }
   };
@@ -227,7 +246,7 @@ class ForgetPassword extends React.Component {
   };
 
   render() {
-    const { step } = this.state;
+    const { step, loader } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
@@ -246,6 +265,7 @@ class ForgetPassword extends React.Component {
             ? this.otpInput()
             : this.newPassword()}
         </View>
+        {loader && handlers.overlayLoader()}
       </View>
     );
   }
@@ -253,11 +273,14 @@ class ForgetPassword extends React.Component {
 
 const mapStateToProps = state => ({
   message: state.authReducer.successMessage,
-  error: state.authReducer.error
+  error: state.authReducer.error,
+  loader: state.authReducer.loader
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleResetRequest: payload => dispatch(onReset(payload))
+  handleResetRequest: payload => dispatch(onReset(payload)),
+  hanldeLoader: () => dispatch(stopOrStartLoader()),
+  reset: () => dispatch(resetErrorAndLoading())
 });
 
 export default connect(

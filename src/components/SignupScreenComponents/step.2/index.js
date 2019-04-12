@@ -1,13 +1,19 @@
 import React from "react";
-import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
+import { Item, Label, Input } from "native-base";
+import { connect } from "react-redux";
+
 import styles from "./styles";
-import { Item, Label, Input, Toast } from "native-base";
 import { icons } from "../../../utils/";
 
+import {
+  resetErrorAndLoading,
+  stopOrStartLoader
+} from "../../../store/auth/actions";
 import { handlers } from "../../../helpers";
 import { confirmCode } from "../../../config/firebase";
 
-export default class Step2 extends React.Component {
+class Step2 extends React.Component {
   constructor(props) {
     super(props);
 
@@ -28,20 +34,24 @@ export default class Step2 extends React.Component {
 
   verifyOTP = async () => {
     const { otp, confirmResult } = this.state;
+    const { handleLoader, reset } = this.state;
 
     if (!otp) {
       return handlers.showToast("S'il vous plaît entrez d'abord OTP", "danger");
     }
 
+    handleLoader();
     const payload = {
       confirmResult,
       otp
     };
     try {
       const user = await confirmCode(payload);
+      reset();
       this.props.nextFn();
     } catch (error) {
       console.log("error", error);
+      reset();
       handlers.showToast(error.message, "danger");
     }
   };
@@ -90,3 +100,15 @@ export default class Step2 extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  handleLoader: () => dispatch(stopOrStartLoader()),
+  reset: () => dispatch(resetErrorAndLoading())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Step2);

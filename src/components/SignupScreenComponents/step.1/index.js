@@ -1,13 +1,19 @@
 import React from "react";
 import { Text, View, ScrollView, Image, TouchableOpacity } from "react-native";
-import styles from "./styles";
+import { connect } from "react-redux";
 import { Item, Label, Input, Toast } from "native-base";
-import { icons } from "../../../utils/";
-import { handlers } from "../../../helpers/index";
 
+import { icons } from "../../../utils/";
+import { handlers } from "../../../helpers";
+import styles from "./styles";
+
+import {
+  resetErrorAndLoading,
+  stopOrStartLoader
+} from "../../../store/auth/actions";
 import { signIn } from "../../../config/firebase";
 
-export default class Step1 extends React.Component {
+class Step1 extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,6 +32,7 @@ export default class Step1 extends React.Component {
 
   sendOTP = async () => {
     const { phoneNumber } = this.state;
+    const { reset, handleLoader } = this.props;
 
     if (!phoneNumber) {
       this.setState({
@@ -37,13 +44,17 @@ export default class Step1 extends React.Component {
       );
     }
 
+    handleLoader();
+
     try {
       const confirmResult = await signIn(number);
       this.props.saveState("0", confirmResult);
       this.props.saveState("1", { phoneNumber: phoneNumber });
+      reset();
       this.props.nextFn();
     } catch (error) {
       console.log("TCL: Signup -> sendOTP -> error", error);
+      reset();
       handlers.showToast(error.message, "danger");
     }
   };
@@ -90,3 +101,15 @@ export default class Step1 extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  handleLoader: () => dispatch(stopOrStartLoader()),
+  reset: () => dispatch(resetErrorAndLoading())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Step1);

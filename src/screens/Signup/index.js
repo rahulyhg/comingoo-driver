@@ -23,8 +23,8 @@ import {
 import { handlers } from "../../helpers/index.js";
 
 const steps = [
-  // { name: "StepOne", component: <StepOne /> },
-  // { name: "StepTwo", component: <StepTwo /> },
+  { name: "StepOne", component: <StepOne /> },
+  { name: "StepTwo", component: <StepTwo /> },
   { name: "StepThree", component: <StepThree /> },
   { name: "StepFour", component: <StepFour /> },
   { name: "StepFive", component: <StepFive /> },
@@ -62,7 +62,7 @@ class Signup extends React.Component {
     }
     if (successMessage && typeof successMessage.message == "string") {
       handlers.showToast(successMessage.message, "success");
-      this.props.navigation.navigate('Home')
+      this.props.navigation.navigate("Home");
     }
     if (this.state.loader !== loader) {
       this.setState({ loader });

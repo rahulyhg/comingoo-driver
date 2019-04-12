@@ -6,7 +6,8 @@ import {
   UPDATE_USER,
   IMAGE_UPLOAD_REQUEST,
   RESET_PASSWORD_REQUEST,
-  LOGIN_REQUEST
+  LOGIN_REQUEST,
+  STOP_OR_START_LOADING
 } from "./types";
 
 export const onSignup = payload => ({
@@ -40,4 +41,8 @@ export const updataUser = payload => ({
 export const onReset = payload => ({
   type: RESET_PASSWORD_REQUEST,
   payload
+});
+
+export const stopOrStartLoader = () => ({
+  type: STOP_OR_START_LOADING
 });

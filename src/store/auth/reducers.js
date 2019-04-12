@@ -13,7 +13,8 @@ import {
   RESETPASSWORD_SUCCESS,
   LOGIN_REQUEST,
   RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS
+  RESET_PASSWORD_SUCCESS,
+  STOP_OR_START_LOADING
 } from "./types";
 
 const initialState = {
@@ -80,7 +81,11 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
         loader: false
       };
-
+    case STOP_OR_START_LOADING:
+      return {
+        ...state,
+        loader: true
+      };
     case RESET:
       return {
         ...state,
