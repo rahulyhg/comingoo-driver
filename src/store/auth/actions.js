@@ -1,4 +1,13 @@
-import { LOGIN, SIGNUP_REQUEST, RESET, LOGOUT, UPDATE_USER, IMAGE_UPLOAD_REQUEST, RESETPASSWORD } from "./types";
+import {
+  LOGIN,
+  SIGNUP_REQUEST,
+  RESET,
+  LOGOUT,
+  UPDATE_USER,
+  IMAGE_UPLOAD_REQUEST,
+  RESETPASSWORD,
+  LOGIN_REQUEST
+} from "./types";
 
 export const onSignup = payload => ({
   type: SIGNUP_REQUEST,
@@ -15,7 +24,7 @@ export const resetErrorAndLoading = () => ({
 });
 
 export const onLogin = payload => ({
-  type: LOGIN,
+  type: LOGIN_REQUEST,
   payload
 });
 
@@ -28,7 +37,7 @@ export const updataUser = payload => ({
   payload
 });
 
-export const onReset = payload  => ({
+export const onReset = payload => ({
   type: RESETPASSWORD,
   payload
 });

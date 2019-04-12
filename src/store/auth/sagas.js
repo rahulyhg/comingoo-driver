@@ -1,17 +1,24 @@
 import { put, takeEvery, takeLatest, select } from "redux-saga/effects";
 import firebase from "firebase";
 import { firebaseConfig } from "../../../env";
-import { ERROR,
-        LOGIN, LOGIN_SUCCESS,
-        SIGNUP_REQUEST, SIGNUP_SUCCESS,
-        IMAGE_UPLOAD_REQUEST, IMAGE_UPLOAD_SUCCESS ,
-        RESETPASSWORD , RESETPASSWORD_SUCCESS} from "./types";
+import {
+  ERROR,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  IMAGE_UPLOAD_REQUEST,
+  IMAGE_UPLOAD_SUCCESS,
+  RESETPASSWORD,
+  RESETPASSWORD_SUCCESS
+} from "./types";
 
 firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.storage();
 
-const base_url = "https://comingoo.herokuapp.com/drivers";
+// const base_url = "https://comingoo.herokuapp.com/drivers";
+const base_url = "https://comingoo-api.herokuapp.com/drivers";
 
 function* handleSignupRequest({ payload }) {
   console.log("TCL: function*handleSignupRequest -> payload", payload);
@@ -93,52 +100,51 @@ function* handleImageUpload({ payload }) {
 }
 
 function* loginRequest({ payload }) {
+  console.log("TCL: function*loginRequest -> payload", payload);
+  const headerOption = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  };
 
-    const headerOption = {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-        };
-
-        try {
-            const data = yield fetch(`${base_url}/loginDriver`, headerOption);
-            const response = yield data.json();
-            if(data.status == 202){
-               yield put({ type: LOGIN_SUCCESS, payload: response });
-            } else {
-              throw response;
-            }
-        } catch (e){
-              yield put({ type: ERROR, payload: e.message });
-        }
+  try {
+    const data = yield fetch(`${base_url}/loginDriver`, headerOption);
+    const response = yield data.json();
+    if (data.status == 202) {
+      yield put({ type: LOGIN_SUCCESS, payload: response });
+    } else {
+      throw response;
+    }
+  } catch (e) {
+    yield put({ type: ERROR, payload: e.message });
+  }
 }
 
 function* handleResetPasswordRequest({ payload }) {
-
-    const headerOption = {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(payload)
-      };
-      try {
-          const data = yield fetch(`${base_url}/passwordReset`, headerOption);
-          const response = yield data.json();
-          if(data.status == 202){
-             yield put({ type: RESETPASSWORD_SUCCESS, payload: response });
-          } else {
-            throw response;
-          }
-      } catch (e){
-            yield put({ type: ERROR, payload: e.message });
-      }
+  const headerOption = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  };
+  try {
+    const data = yield fetch(`${base_url}/passwordReset`, headerOption);
+    const response = yield data.json();
+    if (data.status == 202) {
+      yield put({ type: RESETPASSWORD_SUCCESS, payload: response });
+    } else {
+      throw response;
+    }
+  } catch (e) {
+    yield put({ type: ERROR, payload: e.message });
+  }
 }
 
 export function* watchAuth() {
-  yield takeLatest(LOGIN, loginRequest);
+  yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, handleSignupRequest);
   yield takeLatest(IMAGE_UPLOAD_REQUEST, handleImageUpload);
   yield takeLatest(RESETPASSWORD, handleResetPasswordRequest);

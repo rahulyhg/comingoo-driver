@@ -54,16 +54,15 @@ class Signup extends React.Component {
   componentWillReceiveProps = nextProps => {
     const { error, loader, successMessage, url } = nextProps;
     const { reset } = this.props;
-    console.log("TCL: Signup -> url", url);
     if (Object.keys(url).length) {
       this.sendDataToServer(url);
     }
     if (error && typeof error.message == "string") {
-      console.log("TCL: Signup -> error", error);
       handlers.showToast(error.message, "danger");
     }
     if (successMessage && typeof successMessage.message == "string") {
       handlers.showToast(successMessage.message, "success");
+      this.props.navigation.navigate('Home')
     }
     if (this.state.loader !== loader) {
       this.setState({ loader });
@@ -71,11 +70,9 @@ class Signup extends React.Component {
   };
 
   finish = async wizardState => {
-    console.log("TCL: Signup -> finish -> wizardState", wizardState);
     const { handleSignup, uploadImgToFirebase, reset } = this.props;
     let payload = wizardState[1];
-    console.log("TCL: Signup -> payload", payload);
-    // await handleSignup(payload);
+
     const drivingLicenseImagesUris = [
       payload.drivingLicenseImages.frontUrl,
       payload.drivingLicenseImages.backUrl
@@ -106,7 +103,6 @@ class Signup extends React.Component {
     let { payload } = this.state;
     const { reset, handleSignup } = this.props;
     payload = { ...payload, ...url };
-    console.log("TCL: Signup -> sendDataToServer -> payload", payload);
     await reset();
     await handleSignup(payload);
   };

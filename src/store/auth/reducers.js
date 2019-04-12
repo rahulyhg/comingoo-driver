@@ -1,9 +1,18 @@
-import { RESET,   LOGOUT,
-        SIGNUP_REQUEST, SIGNUP_SUCCESS,
-        LOGIN, LOGIN_SUCCESS,
-        ERROR, UPDATE_USER ,
-        IMAGE_UPLOAD_REQUEST, IMAGE_UPLOAD_SUCCESS,
-        RESETPASSWORD, RESETPASSWORD_SUCCESS} from "./types";
+import {
+  RESET,
+  LOGOUT,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  LOGIN,
+  LOGIN_SUCCESS,
+  ERROR,
+  UPDATE_USER,
+  IMAGE_UPLOAD_REQUEST,
+  IMAGE_UPLOAD_SUCCESS,
+  RESETPASSWORD,
+  RESETPASSWORD_SUCCESS,
+  LOGIN_REQUEST
+} from "./types";
 
 const initialState = {
   user: null,
@@ -16,7 +25,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
+    case LOGIN_REQUEST:
       return {
         ...state,
         loader: true
@@ -55,11 +64,11 @@ const reducer = (state = initialState, action) => {
         user: { ...state.user, ...action.payload }
       };
     case RESETPASSWORD:
-      return { ...state, resetMessage: ""};
+      return { ...state, resetMessage: "" };
     case RESETPASSWORD_SUCCESS:
       return {
         ...state,
-        resetMessage:  action.payload
+        resetMessage: action.payload
       };
     case ERROR:
       return {

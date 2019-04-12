@@ -21,7 +21,7 @@ class Login extends React.Component {
       password: "",
       passwordError: false,
       numberError: false,
-      loader: false,
+      loader: false
     };
   }
 
@@ -30,17 +30,19 @@ class Login extends React.Component {
     headerStyle: styles.headerStyle
   });
 
-   componentWillReceiveProps = nextProps => {
-      const { error, user } = nextProps;
-      if(user){
-        this.props.navigation.navigate('Map');
-        return handlers.showToast("Login Successfully!", "success");
-      } else {
-        return handlers.showToast(error, "danger");
-      }
-   }
+  componentWillReceiveProps = nextProps => {
+    const { error, user } = nextProps;
+    if (user) {
+      console.log("TCL: Login -> user", user);
+      this.props.navigation.navigate("Map");
+      return handlers.showToast("Login Successfully!", "success");
+    } else if (error) {
+      console.log("TCL: Login -> error", error);
+      return handlers.showToast(error, "danger");
+    }
+  };
 
-  login = async() => {
+  login = async () => {
     const { number, password } = this.state;
     if (!number || !password) {
       this.setState({
@@ -48,16 +50,15 @@ class Login extends React.Component {
         passwordError: !password
       });
       return handlers.showToast("Veuillez remplir tous les champs!", "danger");
-    }
-    else {
+    } else {
       const { reset, handleLogin } = this.props;
       await reset();
 
-      const payload={
+      const payload = {
         phoneNumber: number,
         password: password
-      }
-      await handleLogin(payload)
+      };
+      await handleLogin(payload);
     }
   };
 
@@ -78,12 +79,14 @@ class Login extends React.Component {
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
           <View style={styles.topContainer}>
-            <Text style={styles.headingTxt}>{strings('login.login')}</Text>
+            <Text style={styles.headingTxt}>{strings("login.login")}</Text>
           </View>
           <View style={styles.middleContainer}>
             <View style={styles.fieldContainer}>
               <Item stackedLabel style={styles.inputs} error={numberError}>
-                <Label style={styles.labelStyle}>{strings('login.phone_number')}</Label>
+                <Label style={styles.labelStyle}>
+                  {strings("login.phone_number")}
+                </Label>
                 <Input
                   style={styles.inputStyle}
                   keyboardType="phone-pad"
@@ -93,7 +96,9 @@ class Login extends React.Component {
                 />
               </Item>
               <View stackedLabel style={styles.inputs}>
-                <Label style={styles.labelStyle}>{strings('login.password')}</Label>
+                <Label style={styles.labelStyle}>
+                  {strings("login.password")}
+                </Label>
                 <Item error={passwordError}>
                   <Input
                     style={styles.inputStyle}
@@ -112,11 +117,15 @@ class Login extends React.Component {
                 </Item>
               </View>
               <View style={styles.forgetTxtContainer}>
-                <Text style={styles.smallTxt}>{strings('login.forgot_password')}</Text>
+                <Text style={styles.smallTxt}>
+                  {strings("login.forgot_password")}
+                </Text>
                 <TouchableOpacity
                   onPress={() => this.navigate("ForgetPassword")}
                 >
-                  <Text style={styles.mediumTxt}>{strings('login.click_here')}</Text>
+                  <Text style={styles.mediumTxt}>
+                    {strings("login.click_here")}
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -132,16 +141,14 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = state => (
-    {
-      loader: state.authReducer.loader,
-      user: state.authReducer.user,
-      error: state.authReducer.error,
-    }
-);
+const mapStateToProps = state => ({
+  loader: state.authReducer.loader,
+  user: state.authReducer.user,
+  error: state.authReducer.error
+});
 
 const mapDispatchToProps = dispatch => ({
-  handleLogin: payload =>  dispatch(onLogin(payload)),
+  handleLogin: payload => dispatch(onLogin(payload)),
   reset: () => dispatch(resetErrorAndLoading())
 });
 
