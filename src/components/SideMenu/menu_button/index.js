@@ -6,16 +6,16 @@ import styles from './styles'
 class MenuButton extends React.Component{
 render(){
     return(
-        <TouchableOpacity 
+        <TouchableOpacity
         style={styles.menuButton}
-        onPress={() => this.props.navigation.toggleDrawer()}
+        onPress={() => this.props.navigation.navigate('DrawerToggle')}
         >
-        <Image 
+        <Image
         source={icons.menubutton}
         style={styles.menuButtonImg}
        />
         </TouchableOpacity>
-        
+
     )
 }
 }
