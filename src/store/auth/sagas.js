@@ -149,29 +149,6 @@ function* handleResetPasswordRequest({ payload }) {
   }
 }
 
-function* handleResetPasswordRequest({ payload }) {
-
-  const headerOption = {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify(payload)
-      };
-      try {
-          const data = yield fetch(`${base_url}/passwordReset`, headerOption);
-          const response = yield data.json();
-          if(data.status == 202){
-             yield put({ type: RESETPASSWORD_SUCCESS, payload: response });
-          } else {
-            throw response;
-          }
-      } catch (e){
-            yield put({ type: ERROR, payload: e.message });
-      }
-}
-
-
 export function* watchAuth() {
   yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, handleSignupRequest);

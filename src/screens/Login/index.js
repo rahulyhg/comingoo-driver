@@ -32,18 +32,16 @@ class Login extends React.Component {
 
   componentWillReceiveProps = nextProps => {
     const { error, user, loader, reset } = nextProps;
+    this.setState({ loader });
     if (user) {
       console.log("TCL: Login -> user", user);
-      this.props.navigation.navigate("Map");
+      this.props.navigation.navigate("Drawer");
       reset();
       return handlers.showToast("Login Successfully!", "success");
     }
     if (error) {
       console.log("TCL: Login -> error", error);
       return handlers.showToast(error, "danger");
-    }
-    if (loader != this.state.loader) {
-      this.setState({ loader });
     }
   };
 

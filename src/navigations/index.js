@@ -1,13 +1,18 @@
-import { createAppContainer, createStackNavigator, createDrawerNavigator, createSwitchNavigator } from "react-navigation";
+import {
+  createAppContainer,
+  createStackNavigator,
+  createDrawerNavigator,
+  createSwitchNavigator
+} from "react-navigation";
 
 import Login from "../screens/Login";
 import Signup from "../screens/Signup";
 import Home from "../screens/Home";
 import ForgetPassword from "../screens/ForgetPassword";
-import DriverMap from '../screens/Map';
+import DriverMap from "../screens/Map";
 
 // For app drawer
-import SideMenu from '../components/SideMenu/index'
+import SideMenu from "../components/SideMenu/index";
 import Dashboard from "../screens/Dashboard";
 import History from "../screens/History";
 import Aide from "../screens/Aide";
@@ -17,7 +22,7 @@ import Inbox from "../screens/Inbox";
 const AppDrawer = createDrawerNavigator(
   {
     Dashboard: {
-      screen: DriverMap,
+      screen: DriverMap
     },
     History: {
       screen: History
@@ -33,9 +38,9 @@ const AppDrawer = createDrawerNavigator(
     }
   },
   {
-    contentComponent: SideMenu,
-  },
-  );
+    contentComponent: SideMenu
+  }
+);
 
 const MainStack = createStackNavigator(
   {
@@ -47,8 +52,7 @@ const MainStack = createStackNavigator(
     },
     Login: { screen: Login },
     Signup: { screen: Signup },
-    ForgetPassword: { screen: ForgetPassword },
-    Map: { screen:  DriverMap}
+    ForgetPassword: { screen: ForgetPassword }
   },
   {
     initialRouteName: "Home"
@@ -56,9 +60,8 @@ const MainStack = createStackNavigator(
 );
 
 const AppNavigator = createSwitchNavigator({
-  AuthStack : MainStack,
-  Drawer : AppDrawer
-})
-
+  AuthStack: MainStack,
+  Drawer: AppDrawer
+});
 
 export default createAppContainer(AppNavigator);
